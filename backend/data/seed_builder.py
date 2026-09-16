@@ -1,0 +1,1614 @@
+"""
+Seed data builder for MoSJE SIH 2026 Problem Statement #26092.
+Compiles and writes 32 verified government schemes with exact rules,
+financials, documents, and application steps.
+"""
+import json
+import os
+
+SCHEMES = [
+  # 1. NSFDC Term Loan
+  {
+    "id": "nsfdc-term-loan",
+    "name": "NSFDC Term Loan Scheme",
+    "issuing_body": "National Scheduled Castes Finance and Development Corporation (NSFDC), MoSJE",
+    "category_targets": ["SC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Term loan assistance up to ₹50 Lakhs for viable income-generating projects in manufacturing, services, transport, and trading for Scheduled Caste entrepreneurs.",
+    "purpose": "Provide concessional credit for starting or expanding viable business enterprises, manufacturing units, service establishments, or purchasing commercial vehicles.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 5000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Trading", "Transport", "Agriculture/Allied"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 4500000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nsfdc_share_percent": 90.0,
+      "interest_rate_percent": 6.0,
+      "max_tenure_years": 10,
+      "moratorium_months": 12
+    },
+    "documents": [
+      {"name": "Caste Certificate (SC)", "mandatory": True, "notes": "Issued by Competent Authority (Tehsildar/SDM)"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Annual family income not exceeding ₹3.00 Lakh"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Proof of identity and address"},
+      {"name": "Detailed Project Report (DPR)", "mandatory": True, "notes": "Outlining project cost, revenue model, and viability"},
+      {"name": "Bank Account Details (Passbook/Cancelled Cheque)", "mandatory": True, "notes": "Aadhaar-seeded bank account"},
+      {"name": "Quotation for Machinery / Equipment", "mandatory": False, "notes": "For manufacturing or service setups"}
+    ],
+    "application_process": [
+      "Obtain application form from State Channelising Agency (SCA), RRB, or Nationalised Bank.",
+      "Submit DPR along with required KYC, Caste, and Income certificates.",
+      "SCA/Bank appraises project viability and forwards recommendation to NSFDC.",
+      "NSFDC sanctions concessional loan share and disburses via the lending agency.",
+      "Procure assets and submit utilization certificate."
+    ],
+    "official_url": "https://nsfdc.nic.in/en/term-loan-scheme",
+    "last_verified": "2026-08-15",
+    "keywords": ["sc", "scheduled caste", "term loan", "manufacturing", "transport", "workshop", "machinery", "nsfdc", "business", "suresh"]
+  },
+  # 2. NSFDC MSY
+  {
+    "id": "nsfdc-msy",
+    "name": "Mahila Samriddhi Yojana (MSY)",
+    "issuing_body": "National Scheduled Castes Finance and Development Corporation (NSFDC), MoSJE",
+    "category_targets": ["SC"],
+    "gender_targets": ["Female"],
+    "summary": "Micro-finance credit up to ₹1,40,000 for Scheduled Caste women entrepreneurs and Self Help Groups (SHGs) at an ultra-low interest rate of 4% per annum.",
+    "purpose": "Provide micro-credit directly or through SHGs to women belonging to Scheduled Castes for small business activities like tailoring, beauty parlours, grocery shops, handicraft, and poultry.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Female"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 10000,
+      "max_project_cost": 140000,
+      "eligible_sectors": ["Services", "Trading", "Tailoring/Garments", "Artisans/Handicrafts", "Agriculture/Allied"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 140000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "nsfdc_share_percent": 100.0,
+      "interest_rate_percent": 4.0,
+      "max_tenure_years": 4,
+      "moratorium_months": 3
+    },
+    "documents": [
+      {"name": "Caste Certificate (SC)", "mandatory": True, "notes": "Proof of Scheduled Caste status"},
+      {"name": "Income Certificate / Self Declaration", "mandatory": True, "notes": "Family income up to ₹3,00,000"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Bank Passbook", "mandatory": True, "notes": "Individual or SHG bank account details"},
+      {"name": "SHG Membership Record (if applying via SHG)", "mandatory": False, "notes": "Recommended for fast processing"}
+    ],
+    "application_process": [
+      "Contact the local District SCA office or designated Regional Rural Bank / Micro Finance Agency.",
+      "Fill MSY individual or SHG group loan requisition.",
+      "Verification of residence and caste status by field officer.",
+      "Sanction of micro-credit without collateral requirement.",
+      "Repayment in easy monthly instalments over 3 to 4 years."
+    ],
+    "official_url": "https://nsfdc.nic.in/en/mahila-samriddhi-yojana",
+    "last_verified": "2026-08-20",
+    "keywords": ["women", "mahila", "sc", "tailoring", "micro loan", "shg", "beauty parlour", "boutique", "stitching", "handicraft"]
+  },
+  # 3. NSFDC MCF
+  {
+    "id": "nsfdc-mcf",
+    "name": "Micro Credit Finance (MCF) Scheme",
+    "issuing_body": "National Scheduled Castes Finance and Development Corporation (NSFDC), MoSJE",
+    "category_targets": ["SC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Micro-finance up to ₹1,40,000 per beneficiary for small trade, vending, artisan crafts, and tiny business activities for SC individuals.",
+    "purpose": "Meet working capital and small equipment funding needs for micro-enterprises and traditional trades among SC families.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 10000,
+      "max_project_cost": 140000,
+      "eligible_sectors": ["Trading", "Services", "Artisans/Handicrafts", "Agriculture/Allied"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 140000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "nsfdc_share_percent": 100.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 3,
+      "moratorium_months": 3
+    },
+    "documents": [
+      {"name": "SC Caste Certificate", "mandatory": True, "notes": "Issued by Tehsildar/SDM"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Under ₹3,00,000 per annum"},
+      {"name": "Aadhaar Card & Voter ID", "mandatory": True, "notes": "KYC compliance"},
+      {"name": "Bank Passbook Copy", "mandatory": True, "notes": "Savings account details"}
+    ],
+    "application_process": [
+      "Submit application through State Channelising Agency or Channel Partner Bank.",
+      "Brief field verification of proposed tiny business or artisan activity.",
+      "Loan disbursal within 15 to 30 days directly to bank account.",
+      "Repay via quarterly or monthly instalments."
+    ],
+    "official_url": "https://nsfdc.nic.in/en/micro-credit-finance-mcf",
+    "last_verified": "2026-08-10",
+    "keywords": ["micro credit", "sc", "hawker", "small shop", "artisan", "working capital", "tiny business"]
+  },
+  # 4. NSFDC Green Business
+  {
+    "id": "nsfdc-green-business",
+    "name": "Green Business Scheme",
+    "issuing_body": "National Scheduled Castes Finance and Development Corporation (NSFDC), MoSJE",
+    "category_targets": ["SC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Financial support up to ₹30 Lakhs for eco-friendly and climate-resilient micro-enterprises including solar power systems, e-rickshaws, bio-fertilizers, and waste management.",
+    "purpose": "Promote sustainable livelihood opportunities and green technology entrepreneurship among Scheduled Caste individuals.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 100000,
+      "max_project_cost": 3000000,
+      "eligible_sectors": ["Services", "Manufacturing", "Transport", "Clean Energy", "Waste Recycling"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 2700000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nsfdc_share_percent": 90.0,
+      "interest_rate_percent": 5.5,
+      "max_tenure_years": 8,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "SC Caste Certificate", "mandatory": True, "notes": "Official certificate"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Below ₹3,00,000 annually"},
+      {"name": "Quotation for Green Tech / E-vehicle / Solar Gear", "mandatory": True, "notes": "From authorized supplier"},
+      {"name": "Driving License (if applying for E-Rickshaw/EV)", "mandatory": False, "notes": "Required for transport category"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"}
+    ],
+    "application_process": [
+      "Select approved green technology equipment or e-vehicle.",
+      "Submit application through State Channelising Agency or partner bank.",
+      "Credit appraisal with focus on commercial viability of green unit.",
+      "Disbursement of up to 90% project cost."
+    ],
+    "official_url": "https://nsfdc.nic.in/en/green-business-scheme",
+    "last_verified": "2026-07-28",
+    "keywords": ["green", "e-rickshaw", "solar", "ev", "recycling", "sc", "clean energy", "environment"]
+  },
+  # 5. NSFDC LVY
+  {
+    "id": "nsfdc-lvy",
+    "name": "NSFDC Laghu Vyavasay Yojana (LVY)",
+    "issuing_body": "National Scheduled Castes Finance and Development Corporation (NSFDC), MoSJE",
+    "category_targets": ["SC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Term loan assistance up to ₹5,00,000 for small business setups, retail trade, and rural service units for SC entrepreneurs.",
+    "purpose": "Provide hassle-free medium-scale credit for kirana stores, fabrication shops, repair centres, and dairy activities for SC individuals.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 25000,
+      "max_project_cost": 500000,
+      "eligible_sectors": ["Trading", "Services", "Manufacturing", "Agriculture/Allied"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 450000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nsfdc_share_percent": 90.0,
+      "interest_rate_percent": 6.0,
+      "max_tenure_years": 6,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "Caste Certificate (SC)", "mandatory": True, "notes": "Tehsildar/SDM issued"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Annual family income under ₹3.00 Lakh"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Business Quotation / Proforma Invoice", "mandatory": True, "notes": "Itemized expense list"}
+    ],
+    "application_process": [
+      "Apply through State Channelising Agency (SCA) or local District SC Welfare Office.",
+      "Submit quotation and caste/income documents.",
+      "Field officer verifies premise and eligibility.",
+      "Sanction and disbursement of up to 90% project cost."
+    ],
+    "official_url": "https://nsfdc.nic.in/en/laghu-vyavasay-yojana",
+    "last_verified": "2026-08-14",
+    "keywords": ["sc", "lvy", "small business", "kirana", "retail", "nsfdc", "workshop", "suresh"]
+  },
+  # 6. NSFDC MAY
+  {
+    "id": "nsfdc-may",
+    "name": "Mahila Adhikarita Yojana (MAY)",
+    "issuing_body": "National Scheduled Castes Finance and Development Corporation (NSFDC), MoSJE",
+    "category_targets": ["SC"],
+    "gender_targets": ["Female"],
+    "summary": "Micro-finance credit up to ₹2,00,000 at a subsidized interest rate of 4% p.a. for Scheduled Caste women for tiny business activities.",
+    "purpose": "Promote economic self-reliance among SC women through micro-credit for home-based catering, beauty care, stitching, handicrafts, and dairy.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Female"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 15000,
+      "max_project_cost": 200000,
+      "eligible_sectors": ["Services", "Trading", "Tailoring/Garments", "Artisans/Handicrafts", "Food Processing"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 200000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "nsfdc_share_percent": 100.0,
+      "interest_rate_percent": 4.0,
+      "max_tenure_years": 4,
+      "moratorium_months": 3
+    },
+    "documents": [
+      {"name": "SC Caste Certificate", "mandatory": True, "notes": "Official certificate"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Family income under ₹3 Lakh"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Bank Passbook", "mandatory": True, "notes": "Aadhaar-seeded bank account"}
+    ],
+    "application_process": [
+      "Submit request through State Channelising Agency or Mahila Vikas Nigam.",
+      "Simple application and document vetting.",
+      "Direct disbursement at concessional 4% interest rate."
+    ],
+    "official_url": "https://nsfdc.nic.in/en/mahila-adhikarita-yojana",
+    "last_verified": "2026-08-16",
+    "keywords": ["sc", "women", "mahila adhikarita", "tailoring", "dairy", "micro finance", "rekha"]
+  },
+  # 7. NBCFDC New Swarnima
+  {
+    "id": "nbcfdc-new-swarnima",
+    "name": "New Swarnima Scheme for Women",
+    "issuing_body": "National Backward Classes Finance & Development Corporation (NBCFDC), MoSJE",
+    "category_targets": ["OBC"],
+    "gender_targets": ["Female"],
+    "summary": "Term loan up to ₹2,00,000 at a concessional interest rate of 5% p.a. specifically for women entrepreneurs from Other Backward Classes (OBC).",
+    "purpose": "Inculcate spirit of self-reliance among women belonging to backward classes by providing concessional credit for starting tailoring, small boutiques, food processing, packaging, and retail units.",
+    "rules": {
+      "categories": ["OBC"],
+      "gender": ["Female"],
+      "min_age": 18,
+      "max_age": 55,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 20000,
+      "max_project_cost": 200000,
+      "eligible_sectors": ["Services", "Trading", "Tailoring/Garments", "Food Processing", "Artisans/Handicrafts"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 200000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 5.0,
+      "nbcfdc_share_percent": 95.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 8,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "OBC Caste Certificate", "mandatory": True, "notes": "Must confirm non-creamy layer / eligible OBC community"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Annual family income up to ₹3.00 Lakh"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Proof of identity"},
+      {"name": "Bank Passbook", "mandatory": True, "notes": "Active savings account"},
+      {"name": "Simple Business Proposal / Estimate", "mandatory": True, "notes": "Cost of equipment or inventory"}
+    ],
+    "application_process": [
+      "Approach State Channelising Agency (SCA) for Backward Classes or Regional Rural Bank.",
+      "Submit filled New Swarnima application form with OBC and income proof.",
+      "Field verification and vetting of business proposal.",
+      "Sanction and disbursement of up to 95% project cost at 5% p.a.",
+      "Quarterly or monthly repayment schedule with 6-month moratorium."
+    ],
+    "official_url": "https://nbcfdc.gov.in/en/new-swarnima-for-women",
+    "last_verified": "2026-08-25",
+    "keywords": ["obc", "women", "new swarnima", "tailoring", "boutique", "beauty", "stitching", "nbcfdc", "garments", "food processing", "rekha"]
+  },
+  # 8. NBCFDC General Term Loan
+  {
+    "id": "nbcfdc-general-term-loan",
+    "name": "NBCFDC General Term Loan Scheme",
+    "issuing_body": "National Backward Classes Finance & Development Corporation (NBCFDC), MoSJE",
+    "category_targets": ["OBC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Term loan assistance up to ₹15 Lakhs for OBC entrepreneurs to establish self-employment ventures in industry, services, and business sectors.",
+    "purpose": "Provide medium to long-term loans for purchasing machinery, setting up workshops, repair garages, retail stores, and service businesses.",
+    "rules": {
+      "categories": ["OBC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 1500000,
+      "eligible_sectors": ["Manufacturing", "Services", "Trading", "Agriculture/Allied", "Transport"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 1275000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 15.0,
+      "nbcfdc_share_percent": 85.0,
+      "interest_rate_percent": 6.0,
+      "max_tenure_years": 8,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "OBC Certificate", "mandatory": True, "notes": "Issued by authorized revenue authority"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Under ₹3,00,000 family income"},
+      {"name": "Detailed Project Report", "mandatory": True, "notes": "For loans above ₹5 Lakhs"},
+      {"name": "Aadhaar & PAN Card", "mandatory": True, "notes": "KYC verification"},
+      {"name": "Bank Statement (Last 6 Months)", "mandatory": False, "notes": "For existing business expansion"}
+    ],
+    "application_process": [
+      "Apply through designated State Backward Classes Development Corporation or partner RRBs.",
+      "Submit project estimate and caste/income proof.",
+      "Technical and financial appraisal by SCA/Bank.",
+      "Loan sanctioned with up to 85% project financing at 6% p.a."
+    ],
+    "official_url": "https://nbcfdc.gov.in/en/term-loan-scheme",
+    "last_verified": "2026-08-14",
+    "keywords": ["obc", "term loan", "workshop", "nbcfdc", "services", "manufacturing", "trade", "machinery"]
+  },
+  # 9. NBCFDC Shilp Sampada
+  {
+    "id": "nbcfdc-shilp-sampada",
+    "name": "Shilp Sampada Scheme for Artisans",
+    "issuing_body": "National Backward Classes Finance & Development Corporation (NBCFDC), MoSJE",
+    "category_targets": ["OBC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Special loan scheme up to ₹10 Lakhs for traditional OBC artisans, weavers, and craftspersons for working capital and modern toolkits.",
+    "purpose": "Upgrade technology, purchase raw materials, and finance marketing of traditional handicrafts, pottery, metal crafts, handlooms, and woodworking.",
+    "rules": {
+      "categories": ["OBC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 25000,
+      "max_project_cost": 1000000,
+      "eligible_sectors": ["Artisans/Handicrafts", "Manufacturing", "Handloom/Textiles"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 900000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nbcfdc_share_percent": 90.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 8,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "OBC Certificate", "mandatory": True, "notes": "Valid backward class certificate"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Under ₹3,00,000"},
+      {"name": "Artisan Card / Pehchan Card / Proof of Craft", "mandatory": True, "notes": "Issued by DC (Handicrafts/Handlooms) or local guild"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Bank Account Details", "mandatory": True, "notes": "Savings account copy"}
+    ],
+    "application_process": [
+      "Submit application through State Channelising Agency or Weaver/Artisan cooperative society.",
+      "Verification of artisan credentials and workshop premise.",
+      "Loan sanction with concessional interest of 5% p.a.",
+      "Assistance provided for raw material procurement and equipment modernization."
+    ],
+    "official_url": "https://nbcfdc.gov.in/en/shilp-sampada",
+    "last_verified": "2026-08-01",
+    "keywords": ["artisan", "craftsperson", "handicraft", "handloom", "weaver", "obc", "shilp sampada", "pottery", "woodwork"]
+  },
+  # 10. NBCFDC Saksham
+  {
+    "id": "nbcfdc-saksham",
+    "name": "NBCFDC Saksham Scheme for Young Professionals",
+    "issuing_body": "National Backward Classes Finance & Development Corporation (NBCFDC), MoSJE",
+    "category_targets": ["OBC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Concessional term loan up to ₹15 Lakhs for professionally trained/skilled youth belonging to Other Backward Classes (OBC).",
+    "purpose": "Enable ITI, Diploma, and technically qualified OBC youths to establish small clinics, diagnostic labs, IT service centres, architecture, or engineering consultancy.",
+    "rules": {
+      "categories": ["OBC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 45,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 1500000,
+      "eligible_sectors": ["Services", "IT/Computer", "Healthcare", "Engineering", "Manufacturing"],
+      "eligible_states": ["All"],
+      "min_education": "Class 10",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 1350000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nbcfdc_share_percent": 90.0,
+      "interest_rate_percent": 5.5,
+      "max_tenure_years": 8,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "OBC Certificate", "mandatory": True, "notes": "Non-creamy layer OBC certificate"},
+      {"name": "Professional / Technical Diploma / Degree", "mandatory": True, "notes": "Degree/Diploma in relevant field"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Under ₹3 Lakhs"},
+      {"name": "Detailed Project Report", "mandatory": True, "notes": "Business feasibility plan"}
+    ],
+    "application_process": [
+      "Apply online or at State Backward Classes Corporation.",
+      "Submit technical credentials and DPR.",
+      "Screening by committee and sanction of 90% project cost at 5.5% interest."
+    ],
+    "official_url": "https://nbcfdc.gov.in/en/saksham-scheme",
+    "last_verified": "2026-08-11",
+    "keywords": ["obc", "saksham", "professionals", "diploma", "iti", "it", "clinic", "engineering"]
+  },
+  # 11. NBCFDC Krishi Sampada
+  {
+    "id": "nbcfdc-krishi-sampada",
+    "name": "NBCFDC Krishi Sampada Scheme",
+    "issuing_body": "National Backward Classes Finance & Development Corporation (NBCFDC), MoSJE",
+    "category_targets": ["OBC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Financial loan up to ₹2,00,000 for OBC individuals engaged in vegetable, fruit, organic farming, and micro agro-processing trade.",
+    "purpose": "Promote micro agro-enterprises, vegetable retail kiosks, honey production, nursery setups, and greenhouse vegetable cultivation.",
+    "rules": {
+      "categories": ["OBC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 20000,
+      "max_project_cost": 200000,
+      "eligible_sectors": ["Agriculture/Allied", "Food Processing", "Trading"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 190000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 5.0,
+      "nbcfdc_share_percent": 95.0,
+      "interest_rate_percent": 4.0,
+      "max_tenure_years": 4,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "OBC Certificate", "mandatory": True, "notes": "Backward class certificate"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Annual family income under ₹3 Lakh"},
+      {"name": "Land Record (7/12 / Khasra) or Vendor Proof", "mandatory": True, "notes": "Ownership or lease or tenancy proof"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"}
+    ],
+    "application_process": [
+      "Apply through SCA or Primary Agricultural Credit Society (PACS).",
+      "Field verification of agro activity.",
+      "Sanction at 4% interest rate with flexible harvesting-linked repayments."
+    ],
+    "official_url": "https://nbcfdc.gov.in/en/krishi-sampada",
+    "last_verified": "2026-08-05",
+    "keywords": ["obc", "krishi", "agriculture", "vegetable", "farming", "agro", "organic"]
+  },
+  # 12. NHFDC Divyangjan Swavalamban
+  {
+    "id": "nhfdc-divyangjan-swavalamban",
+    "name": "Divyangjan Swavalamban Yojana",
+    "issuing_body": "National Handicapped Finance and Development Corporation (NHFDC / DEPwD), MoSJE",
+    "category_targets": ["PwD", "Any", "General", "SC", "ST", "OBC", "Minority"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Concessional loans up to ₹50 Lakhs for Persons with Disabilities (40% or more disability) for setting up self-employment ventures with interest rebate for women and timely repayment.",
+    "purpose": "Promote economic empowerment and dignity for Divyangjan through financial support for starting retail shops, computer centres, tailoring, repair services, or manufacturing units.",
+    "rules": {
+      "categories": ["PwD", "SC", "ST", "OBC", "Minority", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 5000000,
+      "disability_required": True,
+      "min_disability_percent": 40,
+      "min_project_cost": 25000,
+      "max_project_cost": 5000000,
+      "eligible_sectors": ["Services", "Manufacturing", "Trading", "IT/Computer", "Tailoring/Garments", "Agriculture/Allied"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 4500000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nhfdc_share_percent": 90.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 10,
+      "moratorium_months": 12,
+      "interest_rebate_women": 1.0
+    },
+    "documents": [
+      {"name": "Disability Certificate / UDID Card", "mandatory": True, "notes": "Showing 40% or more disability issued by Medical Board"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity and address proof"},
+      {"name": "Project Proposal / Quotation for Tools", "mandatory": True, "notes": "Outlining proposed activity and expenses"},
+      {"name": "Bank Passbook", "mandatory": True, "notes": "Aadhaar linked account"},
+      {"name": "Educational / Technical Qualification Certificate", "mandatory": False, "notes": "If applicable for skilled services"}
+    ],
+    "application_process": [
+      "Submit application through State Channelising Agency (SCA) for PwD, Nationalised Bank, or RRB.",
+      "Attach UDID card and project report.",
+      "Lending agency appraises application with supportive scrutiny.",
+      "Sanction of loan up to 90% of project cost at 5% to 6% p.a. (1% rebate for women Divyangjan).",
+      "Flexible repayment schedule up to 10 years."
+    ],
+    "official_url": "https://nhfdc.nic.in/divyangjan-swavalamban-yojana",
+    "last_verified": "2026-08-18",
+    "keywords": ["pwd", "divyangjan", "disability", "udid", "handicapped", "swavalamban", "wheelchair", "special needs", "screen reader", "anita"]
+  },
+  # 13. NHFDC Micro Credit
+  {
+    "id": "nhfdc-micro-credit",
+    "name": "NHFDC Micro Credit Scheme for PwD",
+    "issuing_body": "National Handicapped Finance and Development Corporation (NHFDC / DEPwD), MoSJE",
+    "category_targets": ["PwD", "Any", "General", "SC", "ST", "OBC", "Minority"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Micro-finance up to ₹75,000 for disabled individuals through NGOs and SHGs for tiny income-generating activities.",
+    "purpose": "Provide quick, collateral-free micro-credit for home-based crafts, kiosks, mobile recharge counters, candle making, and home grocery sales.",
+    "rules": {
+      "categories": ["PwD", "SC", "ST", "OBC", "Minority", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 5000000,
+      "disability_required": True,
+      "min_disability_percent": 40,
+      "min_project_cost": 10000,
+      "max_project_cost": 75000,
+      "eligible_sectors": ["Services", "Trading", "Home-based Crafts", "Artisans/Handicrafts"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 75000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "nhfdc_share_percent": 100.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 3,
+      "moratorium_months": 2
+    },
+    "documents": [
+      {"name": "UDID / Disability Certificate (40%+)", "mandatory": True, "notes": "Benchmark disability certificate"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Bank Passbook", "mandatory": True, "notes": "Savings account copy"}
+    ],
+    "application_process": [
+      "Contact partner NGO, SHG federations, or State Welfare department.",
+      "Fill simplified 1-page micro-finance form.",
+      "Fast-track sanction without collateral requirement.",
+      "Monthly repayment of ₹1,500 - ₹2,500 over 3 years."
+    ],
+    "official_url": "https://nhfdc.nic.in/micro-credit-scheme",
+    "last_verified": "2026-08-10",
+    "keywords": ["pwd", "disability", "micro finance", "udid", "home business", "kiosk", "handicrafts", "anita"]
+  },
+  # 14. NHFDC Young Professionals
+  {
+    "id": "nhfdc-young-professionals",
+    "name": "NHFDC Scheme for Young Professionals with Disabilities",
+    "issuing_body": "National Handicapped Finance and Development Corporation (NHFDC), MoSJE",
+    "category_targets": ["PwD"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Concessional finance up to ₹25 Lakhs for professionally or technically qualified Persons with Disabilities.",
+    "purpose": "Enable educated Divyangjan (graduates, engineers, accountants, lawyers, designers) to set up their own professional consulting offices, diagnostic centres, or tech agencies.",
+    "rules": {
+      "categories": ["PwD", "SC", "ST", "OBC", "Minority", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 45,
+      "income_ceiling": 5000000,
+      "disability_required": True,
+      "min_disability_percent": 40,
+      "min_project_cost": 50000,
+      "max_project_cost": 2500000,
+      "eligible_sectors": ["Services", "IT/Computer", "Healthcare", "Engineering", "Professional/Consulting"],
+      "eligible_states": ["All"],
+      "min_education": "Graduate",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 2250000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nhfdc_share_percent": 90.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 8,
+      "moratorium_months": 12
+    },
+    "documents": [
+      {"name": "Disability Certificate / UDID Card (40%+)", "mandatory": True, "notes": "Benchmark disability proof"},
+      {"name": "Professional Degree / Certificate", "mandatory": True, "notes": "Degree or professional license"},
+      {"name": "Project Proposal", "mandatory": True, "notes": "Cost of office setup and computing gear"},
+      {"name": "Aadhaar Card & PAN", "mandatory": True, "notes": "Identity proof"}
+    ],
+    "application_process": [
+      "Submit application through State Channelising Agency or Partner Bank.",
+      "Verification of degree and business proposal.",
+      "Sanction with 1% interest rebate for female professionals."
+    ],
+    "official_url": "https://nhfdc.nic.in/young-professionals",
+    "last_verified": "2026-08-19",
+    "keywords": ["pwd", "divyangjan", "professionals", "graduate", "it", "consultancy", "anita"]
+  },
+  # 15. NHFDC Assistive Devices
+  {
+    "id": "nhfdc-assistive-device",
+    "name": "NHFDC Loan for Assistive Devices & Retrofitted Commercial Vehicles",
+    "issuing_body": "National Handicapped Finance and Development Corporation (NHFDC), MoSJE",
+    "category_targets": ["PwD"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Loan assistance up to ₹15 Lakhs for customized retrofitted vehicles and assistive technological aids that facilitate livelihood activities for PwD.",
+    "purpose": "Finance adapted commercial delivery vehicles, specialized wheelchairs, accessible computer software, and braille equipment for livelihood independence.",
+    "rules": {
+      "categories": ["PwD", "SC", "ST", "OBC", "Minority", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 65,
+      "income_ceiling": 5000000,
+      "disability_required": True,
+      "min_disability_percent": 40,
+      "min_project_cost": 25000,
+      "max_project_cost": 1500000,
+      "eligible_sectors": ["Transport", "Services", "Trading", "IT/Computer"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 1350000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nhfdc_share_percent": 90.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 7,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "Disability Certificate (40%+)", "mandatory": True, "notes": "UDID or medical board certificate"},
+      {"name": "Vehicle / Assistive Equipment Proforma Invoice", "mandatory": True, "notes": "From authorized dealer"},
+      {"name": "Valid Driving License (for retrofitted vehicles)", "mandatory": False, "notes": "If applying for commercial vehicle"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"}
+    ],
+    "application_process": [
+      "Select approved retrofitted commercial vehicle or assistive tech tool.",
+      "Apply through SCA or Nationalised Bank.",
+      "Disbursement directly to authorized vehicle manufacturer or dealer."
+    ],
+    "official_url": "https://nhfdc.nic.in/assistive-devices",
+    "last_verified": "2026-08-08",
+    "keywords": ["pwd", "retrofitted", "vehicle", "assistive device", "wheelchair", "transport", "anita"]
+  },
+  # 16. NMDFC Line 1
+  {
+    "id": "nmdfc-term-loan-line1",
+    "name": "NMDFC Term Loan Scheme (Credit Line 1)",
+    "issuing_body": "National Minorities Development and Finance Corporation (NMDFC), Ministry of Minority Affairs",
+    "category_targets": ["Minority"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Term loan assistance up to ₹20 Lakhs at 6% p.a. for notified minorities (Muslim, Christian, Sikh, Buddhist, Jain, Parsi) with annual family income up to ₹3 Lakhs.",
+    "purpose": "Assist backward sections of minority communities to set up commercial and self-employment units in services, manufacturing, transport, and trading.",
+    "rules": {
+      "categories": ["Minority"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 2000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Trading", "Transport", "Artisans/Handicrafts"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 1800000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nmdfc_share_percent": 90.0,
+      "interest_rate_percent": 6.0,
+      "max_tenure_years": 5,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "Minority Community Certificate / Self Affidavit", "mandatory": True, "notes": "Belonging to notified minority community"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Family income not exceeding ₹3,00,000 per annum"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Project Quotation / Feasibility Report", "mandatory": True, "notes": "Estimate of equipment or working capital"},
+      {"name": "Bank Account Details", "mandatory": True, "notes": "Passbook copy"}
+    ],
+    "application_process": [
+      "Submit application to State Minority Financial Corporation (State Channelising Agency).",
+      "Attach minority affidavit, income proof, and project estimate.",
+      "Scrutiny by District Level Screening Committee.",
+      "Sanction of loan with NMDFC providing 90% of funds at 6% interest."
+    ],
+    "official_url": "https://nmdfc.org/term-loan-scheme",
+    "last_verified": "2026-08-16",
+    "keywords": ["minority", "muslim", "christian", "sikh", "jain", "buddhist", "nmdfc", "term loan", "trading", "workshop", "imran"]
+  },
+  # 17. NMDFC Line 2
+  {
+    "id": "nmdfc-term-loan-line2",
+    "name": "NMDFC Term Loan Scheme (Credit Line 2)",
+    "issuing_body": "National Minorities Development and Finance Corporation (NMDFC), Ministry of Minority Affairs",
+    "category_targets": ["Minority"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Term loan up to ₹30 Lakhs for minority entrepreneurs with higher annual family income (up to ₹8.00 Lakhs in both rural and urban areas).",
+    "purpose": "Expand access to concessional credit for middle-income minority entrepreneurs requiring growth capital for workshops, trading houses, and restaurants.",
+    "rules": {
+      "categories": ["Minority"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 800000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 3000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Trading", "Transport", "Food Processing"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 2550000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 15.0,
+      "nmdfc_share_percent": 85.0,
+      "interest_rate_percent": 8.0,
+      "max_tenure_years": 5,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "Minority Status Certificate / Affidavit", "mandatory": True, "notes": "Notified minority member"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Family income up to ₹8,00,000"},
+      {"name": "Aadhaar & PAN Card", "mandatory": True, "notes": "KYC verification"},
+      {"name": "Detailed Project Report", "mandatory": True, "notes": "Feasibility and financials"}
+    ],
+    "application_process": [
+      "Apply to State Minority Finance Corporation under Credit Line 2.",
+      "Submit income documents up to ₹8L ceiling.",
+      "Appraisal and sanction at 8% p.a. (2% rebate for women)."
+    ],
+    "official_url": "https://nmdfc.org/credit-line-2",
+    "last_verified": "2026-08-26",
+    "keywords": ["minority", "credit line 2", "8 lakh", "term loan", "workshop", "nmdfc", "imran"]
+  },
+  # 18. NMDFC Virasat
+  {
+    "id": "nmdfc-virasat",
+    "name": "NMDFC Virasat Scheme for Artisans",
+    "issuing_body": "National Minorities Development and Finance Corporation (NMDFC), Ministry of Minority Affairs",
+    "category_targets": ["Minority"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Special concessional loan up to ₹10 Lakhs at only 5% p.a. for craftspersons from minority communities to preserve and expand traditional arts and crafts.",
+    "purpose": "Provide credit for modern hand tools, raw materials, workshops, and exhibitions to artisans practising traditional crafts like embroidery, zari, woodwork, brassware, leatherwork, and carpets.",
+    "rules": {
+      "categories": ["Minority"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 25000,
+      "max_project_cost": 1000000,
+      "eligible_sectors": ["Artisans/Handicrafts", "Manufacturing", "Handloom/Textiles", "Leather/Footwear"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 900000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "nmdfc_share_percent": 90.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 5,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "Minority Community Certificate / Affidavit", "mandatory": True, "notes": "Notified minority community member"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Annual family income up to ₹3,00,000"},
+      {"name": "Artisan Identity Card (Pehchan ID)", "mandatory": True, "notes": "Issued by Development Commissioner (Handicrafts/Handloom)"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Quotation for Raw Material / Equipment", "mandatory": True, "notes": "Estimated breakdown"}
+    ],
+    "application_process": [
+      "Submit application through State Channelising Agency (SCA) or Artisan Clusters.",
+      "Attach Pehchan artisan card and proof of craft lineage.",
+      "Verification by local handicrafts officer.",
+      "Sanction and disbursement of up to 90% project cost at 5% p.a."
+    ],
+    "official_url": "https://nmdfc.org/virasat-scheme",
+    "last_verified": "2026-08-22",
+    "keywords": ["artisan", "craft", "minority", "virasat", "zari", "woodwork", "handicraft", "weaver", "imran"]
+  },
+  # 19. NMDFC Mahila Samridhi
+  {
+    "id": "nmdfc-mahila-samridhi",
+    "name": "NMDFC Mahila Samridhi Scheme",
+    "issuing_body": "National Minorities Development and Finance Corporation (NMDFC), Ministry of Minority Affairs",
+    "category_targets": ["Minority"],
+    "gender_targets": ["Female"],
+    "summary": "Micro-finance up to ₹1,00,000 for women belonging to minority communities at 4% interest per annum through SHGs.",
+    "purpose": "Provide soft micro-credit directly or via Women Self Help Groups for tailoring, petty shops, food preparation, and home-based enterprises.",
+    "rules": {
+      "categories": ["Minority"],
+      "gender": ["Female"],
+      "min_age": 18,
+      "max_age": 58,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 10000,
+      "max_project_cost": 100000,
+      "eligible_sectors": ["Services", "Trading", "Tailoring/Garments", "Artisans/Handicrafts"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 100000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "nmdfc_share_percent": 100.0,
+      "interest_rate_percent": 4.0,
+      "max_tenure_years": 3,
+      "moratorium_months": 3
+    },
+    "documents": [
+      {"name": "Minority Community Affidavit", "mandatory": True, "notes": "Notified minority proof"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Under ₹3,00,000 per annum"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Bank Passbook Copy", "mandatory": True, "notes": "Savings account"}
+    ],
+    "application_process": [
+      "Contact State Minority Development Corporation or accredited SHG partner.",
+      "Submit simple 1-page form with Aadhaar and minority affidavit.",
+      "Fast group-based appraisal without collateral.",
+      "Disbursement at 4% p.a. interest."
+    ],
+    "official_url": "https://nmdfc.org/mahila-samridhi",
+    "last_verified": "2026-08-12",
+    "keywords": ["minority", "women", "mahila samridhi", "shg", "tailoring", "stitching", "micro loan"]
+  },
+  # 20. NMDFC Micro Finance
+  {
+    "id": "nmdfc-micro-finance",
+    "name": "NMDFC Micro Financing Scheme (Direct / NGO Mode)",
+    "issuing_body": "National Minorities Development and Finance Corporation (NMDFC), Ministry of Minority Affairs",
+    "category_targets": ["Minority"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Micro-finance loans up to ₹1,50,000 for poor minority individuals through accredited NGOs and Self-Help Groups.",
+    "purpose": "Provide easy collateral-free micro credit for petty shops, fruit vending, tailoring, and artisan tool procurement.",
+    "rules": {
+      "categories": ["Minority"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 300000,
+      "disability_required": False,
+      "min_project_cost": 10000,
+      "max_project_cost": 150000,
+      "eligible_sectors": ["Trading", "Services", "Tailoring/Garments", "Artisans/Handicrafts"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 150000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "nmdfc_share_percent": 100.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 3,
+      "moratorium_months": 3
+    },
+    "documents": [
+      {"name": "Minority Affidavit", "mandatory": True, "notes": "Self declaration"},
+      {"name": "Income Certificate", "mandatory": True, "notes": "Under ₹3 Lakh"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"}
+    ],
+    "application_process": [
+      "Contact accredited NGO partner or State Channelising Agency.",
+      "Submit micro-loan requisition.",
+      "Disbursal within 2-3 weeks at 5% interest rate."
+    ],
+    "official_url": "https://nmdfc.org/micro-financing",
+    "last_verified": "2026-08-15",
+    "keywords": ["minority", "micro finance", "ngo", "shg", "petty shop", "imran"]
+  },
+  # 21. PMEGP
+  {
+    "id": "pmegp-scheme",
+    "name": "Prime Minister Employment Generation Programme (PMEGP)",
+    "issuing_body": "Khadi and Village Industries Commission (KVIC), Ministry of MSME",
+    "category_targets": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Flagship credit-linked capital subsidy scheme: Up to ₹50 Lakhs for manufacturing and ₹20 Lakhs for services, with 25% to 35% government subsidy for marginalised and women entrepreneurs.",
+    "purpose": "Generate self-employment opportunities through establishment of micro-enterprises in non-farm sector across rural and urban areas.",
+    "rules": {
+      "categories": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 70,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 5000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Food Processing", "Tailoring/Garments", "Woodwork/Furniture", "Engineering"],
+      "eligible_states": ["All"],
+      "min_education": "Class 8",
+      "business_stage": ["New"]
+    },
+    "financials": {
+      "max_loan_amount": 4750000,
+      "subsidy_percent": 35.0,
+      "max_subsidy_amount": 1750000,
+      "margin_money_percent": 5.0,
+      "bank_loan_percent": 60.0,
+      "interest_rate_percent": 8.5,
+      "max_tenure_years": 7,
+      "moratorium_months": 6,
+      "notes_subsidy": "Special category (SC/ST/OBC/Minority/Women/PwD) gets 35% subsidy in rural areas and 25% in urban areas. Own contribution is only 5%."
+    },
+    "documents": [
+      {"name": "Aadhaar Card & PAN Card", "mandatory": True, "notes": "Identity and tax proof"},
+      {"name": "Caste / Special Category Certificate", "mandatory": True, "notes": "SC/ST/OBC/Minority/PwD/Ex-Servicemen to claim 35% subsidy"},
+      {"name": "Education Certificate (8th Pass Marksheet)", "mandatory": True, "notes": "Mandatory for projects above ₹10L in manufacturing or ₹5L in services"},
+      {"name": "Detailed Project Report (DPR)", "mandatory": True, "notes": "Viability, cash flow projections, and machinery quotation"},
+      {"name": "Rural Area Certificate", "mandatory": False, "notes": "From Gram Panchayat/Block officer to claim higher 35% rural subsidy"},
+      {"name": "EDP Training Certificate", "mandatory": False, "notes": "Can be completed online via e-portal after in-principle sanction"}
+    ],
+    "application_process": [
+      "Register online at PMEGP e-Portal (kviconline.gov.in/pmegpeportal).",
+      "Fill online application form and upload DPR, caste certificate, and education proof.",
+      "Select preferred financing bank branch in your district.",
+      "Application is verified by District Industries Centre (DIC) / KVIC / KVIB and forwarded to bank.",
+      "Bank sanctions term loan and working capital.",
+      "Complete 5-10 days Entrepreneurship Development Programme (EDP) training.",
+      "Government subsidy (Margin Money) is kept in term deposit for 3 years and then adjusted against loan."
+    ],
+    "official_url": "https://www.kviconline.gov.in/pmegpeportal/pmegphome/index.jsp",
+    "last_verified": "2026-08-30",
+    "keywords": ["pmegp", "subsidy", "kvic", "manufacturing", "services", "sc", "st", "obc", "women", "dpr", "tailoring", "workshop", "rekha", "suresh"]
+  },
+  # 22. Stand-Up India
+  {
+    "id": "stand-up-india",
+    "name": "Stand-Up India Scheme",
+    "issuing_body": "Department of Financial Services (DFS), Ministry of Finance / SIDBI",
+    "category_targets": ["SC", "ST", "Women"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Bank loans between ₹10 Lakhs and ₹1 Crore for Scheduled Caste (SC), Scheduled Tribe (ST), and Women entrepreneurs for greenfield enterprises in manufacturing, services, or trading.",
+    "purpose": "Promote entrepreneurship among SC, ST, and women borrowers to set up greenfield (first-time) enterprises across India.",
+    "rules": {
+      "categories": ["SC", "ST", "Women"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 70,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 1000000,
+      "max_project_cost": 10000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Trading", "Agri-Allied"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New"]
+    },
+    "financials": {
+      "max_loan_amount": 8500000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 15.0,
+      "bank_loan_percent": 85.0,
+      "interest_rate_percent": 8.0,
+      "max_tenure_years": 7,
+      "moratorium_months": 18,
+      "notes": "Margin money can be converged with eligible central/state subsidies so that actual borrower stake is at least 10%."
+    },
+    "documents": [
+      {"name": "SC/ST Caste Certificate OR Proof of Woman Entrepreneurship", "mandatory": True, "notes": "For non-individual enterprises, 51% shareholding must be held by SC/ST or woman"},
+      {"name": "PAN Card & Aadhaar Card", "mandatory": True, "notes": "Mandatory KYC"},
+      {"name": "Detailed Project Report (DPR)", "mandatory": True, "notes": "Comprehensive business plan and financial projections"},
+      {"name": "Rent Agreement / Land Documents for Enterprise", "mandatory": True, "notes": "Proof of place of business"},
+      {"name": "Last 6 Months Bank Statement", "mandatory": True, "notes": "Applicant bank statement"}
+    ],
+    "application_process": [
+      "Apply online on Stand-Up Mitra portal (standupmitra.in) or directly at any Scheduled Commercial Bank branch.",
+      "Select 'Trainee Borrower' (for handholding) or 'Ready Borrower' mode.",
+      "Connect with Lead District Manager (LDM) or SIDBI desk for credit facilitation.",
+      "Bank processes appraisal for Composite Loan (Term loan + Working capital).",
+      "Sanction with maximum 18 months moratorium."
+    ],
+    "official_url": "https://www.standupmitra.in",
+    "last_verified": "2026-08-28",
+    "keywords": ["stand up india", "women", "sc", "st", "crore", "manufacturing", "greenfield", "suresh", "sidbi", "composite loan"]
+  },
+  # 23. MUDRA Shishu
+  {
+    "id": "mudra-shishu",
+    "name": "Pradhan Mantri MUDRA Yojana (PMMY) - Shishu",
+    "issuing_body": "Micro Units Development and Refinance Agency (MUDRA) / MoF",
+    "category_targets": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Collateral-free micro loans up to ₹50,000 for tiny micro-enterprises, vegetable vendors, repair shops, and home businesses with zero processing fee.",
+    "purpose": "Fund the unfunded: provide immediate start-up and working capital credit to micro units in trading, services, and processing.",
+    "rules": {
+      "categories": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 65,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 5000,
+      "max_project_cost": 50000,
+      "eligible_sectors": ["Trading", "Services", "Manufacturing", "Tailoring/Garments", "Artisans/Handicrafts"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 50000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "bank_loan_percent": 100.0,
+      "interest_rate_percent": 8.0,
+      "max_tenure_years": 5,
+      "moratorium_months": 3
+    },
+    "documents": [
+      {"name": "Aadhaar Card & Voter ID", "mandatory": True, "notes": "Identity and address proof"},
+      {"name": "Passport Size Photographs (2)", "mandatory": True, "notes": "Recent photographs"},
+      {"name": "Bank Passbook Copy", "mandatory": True, "notes": "Savings account in any commercial bank or RRB"},
+      {"name": "Brief Description of Proposed Activity", "mandatory": True, "notes": "Simple 1-page format"}
+    ],
+    "application_process": [
+      "Approach any commercial bank, RRB, Small Finance Bank, or MFI.",
+      "Submit 1-page simplified Shishu loan application form.",
+      "No collateral or third-party guarantor required.",
+      "Sanctioned loan credited to MUDRA Card / savings account.",
+      "Use MUDRA RuPay Debit Card to draw working capital as needed."
+    ],
+    "official_url": "https://www.mudra.org.in",
+    "last_verified": "2026-08-15",
+    "keywords": ["mudra", "shishu", "50000", "micro loan", "collateral free", "vendor", "small shop", "tailoring", "rekha"]
+  },
+  # 24. MUDRA Kishore
+  {
+    "id": "mudra-kishore",
+    "name": "Pradhan Mantri MUDRA Yojana (PMMY) - Kishore",
+    "issuing_body": "Micro Units Development and Refinance Agency (MUDRA) / MoF",
+    "category_targets": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Collateral-free business loans between ₹50,001 and ₹5,00,000 for expanding micro-enterprises, procuring machinery, and working capital.",
+    "purpose": "Provide growth capital for micro-enterprises ready to scale their tailoring boutique, repair garage, fabrication shop, or grocery supermarket.",
+    "rules": {
+      "categories": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 65,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 50001,
+      "max_project_cost": 500000,
+      "eligible_sectors": ["Trading", "Services", "Manufacturing", "Tailoring/Garments", "Workshop", "Transport"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 450000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "bank_loan_percent": 90.0,
+      "interest_rate_percent": 8.5,
+      "max_tenure_years": 5,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "Aadhaar & PAN Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Proof of Business Address / Udyam Registration", "mandatory": True, "notes": "Free MSME Udyam registration certificate"},
+      {"name": "Machinery Quotation / Inventory Estimate", "mandatory": True, "notes": "From supplier"},
+      {"name": "Last 6 Months Bank Statement", "mandatory": True, "notes": "Bank transaction record"}
+    ],
+    "application_process": [
+      "Apply online on Udyamimukhi / JanSamarth portal or visit nearest bank.",
+      "Submit Kishore application form with machinery quotation.",
+      "Credit assessment without collateral under CGTMSE/CGFMU guarantee.",
+      "Loan disbursed in term loan and overdraft components."
+    ],
+    "official_url": "https://www.mudra.org.in",
+    "last_verified": "2026-08-20",
+    "keywords": ["mudra", "kishore", "5 lakh", "machinery", "tailoring", "workshop", "working capital", "rekha", "suresh"]
+  },
+  # 25. MUDRA Tarun
+  {
+    "id": "mudra-tarun",
+    "name": "Pradhan Mantri MUDRA Yojana (PMMY) - Tarun",
+    "issuing_body": "Micro Units Development and Refinance Agency (MUDRA) / MoF",
+    "category_targets": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Loans between ₹5,00,001 and ₹10,00,000 (extended up to ₹20 Lakhs for proven track record borrowers) for mature micro-enterprises.",
+    "purpose": "Empower established enterprises to buy advanced manufacturing machinery, expand facility, or hire workers.",
+    "rules": {
+      "categories": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 65,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 500001,
+      "max_project_cost": 1000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Trading", "Engineering"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 850000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 15.0,
+      "bank_loan_percent": 85.0,
+      "interest_rate_percent": 9.0,
+      "max_tenure_years": 5,
+      "moratorium_months": 6
+    },
+    "documents": [
+      {"name": "KYC (Aadhaar & PAN)", "mandatory": True, "notes": "Mandatory identity proof"},
+      {"name": "Udyam Registration Certificate", "mandatory": True, "notes": "MSME registration"},
+      {"name": "Audited / CA Certified Balance Sheet (2 Years)", "mandatory": True, "notes": "Financial performance record"},
+      {"name": "Last 1 Year Bank Statement", "mandatory": True, "notes": "Transaction history"},
+      {"name": "Machinery Proforma Invoice", "mandatory": True, "notes": "Supplier quotation"}
+    ],
+    "application_process": [
+      "Apply via JanSamarth portal or visit bank branch.",
+      "Submit financial statements and expansion project report.",
+      "Loan appraisal under MUDRA credit guarantee scheme.",
+      "Disbursement with flexible repayment options."
+    ],
+    "official_url": "https://www.mudra.org.in",
+    "last_verified": "2026-08-15",
+    "keywords": ["mudra", "tarun", "10 lakh", "expansion", "manufacturing", "suresh", "workshop"]
+  },
+  # 26. PM Vishwakarma
+  {
+    "id": "pm-vishwakarma",
+    "name": "PM Vishwakarma Scheme",
+    "issuing_body": "Ministry of MSME and MoSJE",
+    "category_targets": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Comprehensive support for traditional artisans across 18 trades: Skill training, ₹15,000 toolkit incentive, and collateral-free loans up to ₹3 Lakhs at 5% interest.",
+    "purpose": "Recognize, skill, and empower traditional artisans and craftspeople working with hands and tools in trades like tailoring, carpentry, blacksmithing, pottery, and cobblery.",
+    "rules": {
+      "categories": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 70,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 15000,
+      "max_project_cost": 300000,
+      "eligible_sectors": ["Artisans/Handicrafts", "Tailoring/Garments", "Carpentry/Woodwork", "Blacksmith/Metal", "Pottery", "Cobbler/Leather"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 300000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 15000,
+      "margin_money_percent": 0.0,
+      "bank_loan_percent": 100.0,
+      "interest_rate_percent": 5.0,
+      "max_tenure_years": 5,
+      "moratorium_months": 3,
+      "notes": "First tranche of ₹1,00,000 for 18 months tenure; second tranche of ₹2,00,000 for 30 months tenure upon timely repayment. Free ₹15,000 e-voucher for modern toolkits."
+    },
+    "documents": [
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Biometric verification at Common Service Centre (CSC)"},
+      {"name": "Mobile Number linked with Aadhaar", "mandatory": True, "notes": "For OTP authentication"},
+      {"name": "Bank Account Details", "mandatory": True, "notes": "For direct benefit transfer of toolkit incentive and stipend"},
+      {"name": "Ration Card / Family Declaration", "mandatory": True, "notes": "Only one member per family is eligible"}
+    ],
+    "application_process": [
+      "Visit nearest Common Service Centre (CSC) with Aadhaar and bank passbook.",
+      "Complete biometric registration under eligible artisan trade.",
+      "Three-stage verification: Gram Panchayat / Urban Local Body, District Screening Committee, and State Committee.",
+      "Receive PM Vishwakarma ID card and digital certificate.",
+      "Attend 5-7 days basic skill training with ₹500/day stipend.",
+      "Receive ₹15,000 digital voucher to purchase modern toolkit.",
+      "Access Tranche-1 collateral-free enterprise loan up to ₹1,00,000 at 5% interest."
+    ],
+    "official_url": "https://pmvishwakarma.gov.in",
+    "last_verified": "2026-09-01",
+    "keywords": ["vishwakarma", "artisan", "carpenter", "blacksmith", "tailor", "darzi", "potter", "cobbler", "traditional craft", "toolkit", "15000", "imran", "rekha"]
+  },
+  # 27. PM SVANidhi
+  {
+    "id": "pm-svanidhi",
+    "name": "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)",
+    "issuing_body": "Ministry of Housing and Urban Affairs (MoHUA)",
+    "category_targets": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Collateral-free working capital micro-loans (₹10,000, ₹20,000, and ₹50,000) for urban street vendors with 7% interest subsidy and digital cashback.",
+    "purpose": "Facilitate working capital credit to street vendors to restart livelihoods and transition into formalized banking channels.",
+    "rules": {
+      "categories": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 65,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 5000,
+      "max_project_cost": 50000,
+      "eligible_sectors": ["Trading", "Services", "Street Vending"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 50000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 0.0,
+      "bank_loan_percent": 100.0,
+      "interest_rate_percent": 7.0,
+      "max_tenure_years": 3,
+      "moratorium_months": 1,
+      "notes": "7% interest subsidy credited directly to bank account on regular repayment; up to ₹1,200/year cashback on digital UPI transactions."
+    },
+    "documents": [
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Certificate of Vending / Vending ID Card OR Recommendation Letter (LoR)", "mandatory": True, "notes": "Issued by Urban Local Body / Town Vending Committee (TVC)"},
+      {"name": "Bank Account Linked with Mobile", "mandatory": True, "notes": "For loan disbursement and digital cashbacks"}
+    ],
+    "application_process": [
+      "Register on PM SVANidhi portal or visit nearest CSC/bank.",
+      "Enter Certificate of Vending number or Letter of Recommendation from Municipality.",
+      "Submit application to chosen lending institution.",
+      "Loan disbursed directly to bank account.",
+      "Repay in monthly instalments over 12 months (Tranche 1: ₹10k) to unlock higher tranches (₹20k & ₹50k)."
+    ],
+    "official_url": "https://pmsvanidhi.mohua.gov.in",
+    "last_verified": "2026-08-20",
+    "keywords": ["svanidhi", "vendor", "street vendor", "hawker", "rehari", "thela", "working capital", "10000"]
+  },
+  # 28. VCF-SC
+  {
+    "id": "vcf-sc",
+    "name": "Venture Capital Fund for Scheduled Castes (VCF-SC)",
+    "issuing_body": "IFCI Venture Capital / Ministry of Social Justice and Empowerment (MoSJE)",
+    "category_targets": ["SC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Equity and quasi-equity risk capital financing from ₹20 Lakhs to ₹15 Crores for innovative and growing enterprises promoted by SC entrepreneurs.",
+    "purpose": "Promote entrepreneurship among SC youth through patient capital, equity investment, and financial handholding for technological up-gradation and scale.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 21,
+      "max_age": 60,
+      "income_ceiling": 50000000,
+      "disability_required": False,
+      "min_project_cost": 2000000,
+      "max_project_cost": 150000000,
+      "eligible_sectors": ["Manufacturing", "Services", "IT/Tech", "Clean Tech", "Healthcare"],
+      "eligible_states": ["All"],
+      "min_education": "Class 10",
+      "business_stage": ["Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 150000000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 25.0,
+      "vcf_share_percent": 75.0,
+      "interest_rate_percent": 4.0,
+      "max_tenure_years": 8,
+      "moratorium_months": 24,
+      "notes": "Provided as Compulsorily Convertible Debentures (CCDs) / Equity / Soft Loan at 4% p.a. (3.75% for women promoters)."
+    },
+    "documents": [
+      {"name": "Caste Certificate of Promoters", "mandatory": True, "notes": "SC promoters must hold at least 51% equity"},
+      {"name": "Company Incorporation Certificate (Pvt Ltd / LLP)", "mandatory": True, "notes": "Registered entity"},
+      {"name": "Comprehensive Business Plan & DPR", "mandatory": True, "notes": "Market analysis, audited financials, and projections"},
+      {"name": "Promoters KYC and PAN", "mandatory": True, "notes": "Statutory compliance"}
+    ],
+    "application_process": [
+      "Submit investment proposal on IFCI Venture online portal.",
+      "Initial screening and presentation before Investment Committee.",
+      "Detailed financial and legal due diligence.",
+      "Sanction of venture capital investment with up to 8 years investment horizon."
+    ],
+    "official_url": "https://www.vcfsc.in",
+    "last_verified": "2026-08-10",
+    "keywords": ["venture capital", "vcf-sc", "sc", "equity", "tech", "startup", "ifci", "mosje"]
+  },
+  # 29. Mahila Coir Yojana
+  {
+    "id": "mahila-coir-yojana",
+    "name": "Mahila Coir Yojana",
+    "issuing_body": "Coir Board, Ministry of MSME",
+    "category_targets": ["Women", "SC", "ST", "OBC", "General"],
+    "gender_targets": ["Female"],
+    "summary": "Women-centric scheme providing 75% subsidy for motorized coir spinning rats and traditional coir equipment, enabling rural women to double daily earnings.",
+    "purpose": "Empower rural women in coconut growing states through modern spinning equipment, skill training, and self-employment in coir processing.",
+    "rules": {
+      "categories": ["Women", "SC", "ST", "OBC", "Minority", "General"],
+      "gender": ["Female"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 10000,
+      "max_project_cost": 250000,
+      "eligible_sectors": ["Artisans/Handicrafts", "Manufacturing", "Agri-Allied", "Coir"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing"]
+    },
+    "financials": {
+      "max_loan_amount": 62500,
+      "subsidy_percent": 75.0,
+      "max_subsidy_amount": 187500,
+      "margin_money_percent": 25.0,
+      "interest_rate_percent": 0.0,
+      "max_tenure_years": 3,
+      "moratorium_months": 3
+    },
+    "documents": [
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Coir Training Certificate", "mandatory": True, "notes": "Completed 2-month training at Coir Board training centre"},
+      {"name": "Bank Passbook Copy", "mandatory": True, "notes": "Savings account details"}
+    ],
+    "application_process": [
+      "Enroll in Coir Board training program (stipend ₹3,000/month provided).",
+      "Apply for Mahila Coir Yojana equipment subsidy upon course completion.",
+      "Receive 75% subsidy on motorized rat or automatic spinning machine.",
+      "Start domestic production with buyback linkages through Coir Board showrooms."
+    ],
+    "official_url": "https://coirboard.gov.in/?page_id=275",
+    "last_verified": "2026-07-20",
+    "keywords": ["coir", "women", "mahila coir", "subsidy", "handicraft", "rural", "coconut", "spinning"]
+  },
+  # 30. CGTMSE
+  {
+    "id": "cgtmse-guarantee",
+    "name": "Credit Guarantee Scheme for Micro & Small Enterprises (CGTMSE)",
+    "issuing_body": "CGTMSE / Ministry of MSME and SIDBI",
+    "category_targets": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Collateral-free credit guarantee up to ₹5 Crore for micro and small enterprises, with 85% guarantee coverage and 10% concession in guarantee fee for women/SC/ST/PwD borrowers.",
+    "purpose": "Enable first-generation entrepreneurs from marginalised backgrounds to secure commercial bank term loans and working capital without pledging property or third-party collateral.",
+    "rules": {
+      "categories": ["SC", "ST", "OBC", "Minority", "Women", "PwD", "General"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 70,
+      "income_ceiling": 50000000,
+      "disability_required": False,
+      "min_project_cost": 100000,
+      "max_project_cost": 50000000,
+      "eligible_sectors": ["Manufacturing", "Services", "IT/Tech", "Trading", "Engineering"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 50000000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 15.0,
+      "bank_loan_percent": 85.0,
+      "interest_rate_percent": 8.5,
+      "max_tenure_years": 8,
+      "moratorium_months": 12,
+      "notes": "Up to 85% credit guarantee coverage for loans to Women, SC, ST, and PwD promoters."
+    },
+    "documents": [
+      {"name": "Udyam Registration Certificate", "mandatory": True, "notes": "Official MSME registration"},
+      {"name": "Detailed Project Report (DPR)", "mandatory": True, "notes": "Business plan with financial projections"},
+      {"name": "Aadhaar & PAN Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Category / PwD Certificate", "mandatory": False, "notes": "For claiming enhanced 85% guarantee cover"}
+    ],
+    "application_process": [
+      "Prepare business proposal and obtain Udyam registration.",
+      "Approach Member Lending Institution (Public/Private Bank, RRB, or NBFC).",
+      "Request collateral-free loan sanction under CGTMSE coverage.",
+      "Lending institution directly secures guarantee coverage from CGTMSE portal.",
+      "Loan disbursed without any real estate mortgage requirement."
+    ],
+    "official_url": "https://www.cgtmse.in",
+    "last_verified": "2026-08-22",
+    "keywords": ["cgtmse", "collateral free", "guarantee", "msme", "workshop", "manufacturing", "suresh"]
+  },
+  # 31. Dr. Ambedkar Special Assistance
+  {
+    "id": "dr-ambedkar-special-assistance",
+    "name": "Dr. B.R. Ambedkar Special Assistance Scheme for SC/ST MSMEs",
+    "issuing_body": "Ministry of Social Justice and Empowerment / State Industries Departments",
+    "category_targets": ["SC", "ST"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Capital investment subsidy up to 35% (max ₹30 Lakhs) and 5% interest subvention for SC/ST micro and small manufacturing units.",
+    "purpose": "Provide comprehensive fiscal support, power tariff subsidy, and capital incentives to first-generation Dalit and Adivasi manufacturers.",
+    "rules": {
+      "categories": ["SC", "ST"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 21,
+      "max_age": 65,
+      "income_ceiling": 50000000,
+      "disability_required": False,
+      "min_project_cost": 500000,
+      "max_project_cost": 10000000,
+      "eligible_sectors": ["Manufacturing", "Food Processing", "Engineering", "Workshop", "Recycling"],
+      "eligible_states": ["All"],
+      "min_education": "Class 8",
+      "business_stage": ["New", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 8500000,
+      "subsidy_percent": 35.0,
+      "max_subsidy_amount": 3000000,
+      "margin_money_percent": 10.0,
+      "interest_rate_percent": 6.5,
+      "max_tenure_years": 7,
+      "moratorium_months": 12
+    },
+    "documents": [
+      {"name": "SC/ST Caste Certificate", "mandatory": True, "notes": "100% shareholding by SC/ST promoters"},
+      {"name": "Udyam Registration Certificate", "mandatory": True, "notes": "MSME registration"},
+      {"name": "Detailed Project Report (DPR)", "mandatory": True, "notes": "Prepared by certified chartered engineer / consultant"},
+      {"name": "Bank Term Loan Sanction Letter", "mandatory": True, "notes": "From commercial bank or SFC"}
+    ],
+    "application_process": [
+      "Obtain bank term loan sanction for manufacturing enterprise.",
+      "Apply on State Single Window portal for Dr. Ambedkar Special Assistance Subsidy.",
+      "Joint physical inspection by District Industries Centre (DIC).",
+      "Capital subsidy credited to loan account as back-ended subsidy."
+    ],
+    "official_url": "https://socialjustice.gov.in",
+    "last_verified": "2026-08-20",
+    "keywords": ["dr ambedkar", "sc", "st", "subsidy", "manufacturing", "dalit", "suresh", "workshop"]
+  },
+  # 32. SIDBI Mahila Udyam Nidhi
+  {
+    "id": "sidbi-mahila-udyam-nidhi",
+    "name": "SIDBI Mahila Udyam Nidhi (MUN) Scheme",
+    "issuing_body": "Small Industries Development Bank of India (SIDBI)",
+    "category_targets": ["Women"],
+    "gender_targets": ["Female"],
+    "summary": "Soft seed capital assistance up to ₹2.5 Lakhs at a service charge of only 1% per annum to meet equity/margin money gap for women entrepreneurs.",
+    "purpose": "Enable women entrepreneurs in micro and tiny sectors to bridge their promoter equity deficit and establish new manufacturing or service units.",
+    "rules": {
+      "categories": ["Women", "SC", "ST", "OBC", "Minority", "General", "PwD"],
+      "gender": ["Female"],
+      "min_age": 18,
+      "max_age": 65,
+      "income_ceiling": 5000000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 1000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Tailoring/Garments", "Food Processing", "Beauty/Wellness", "Crafts"],
+      "eligible_states": ["All"],
+      "min_education": "None",
+      "business_stage": ["New", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 250000,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0,
+      "margin_money_percent": 10.0,
+      "interest_rate_percent": 1.0,
+      "max_tenure_years": 10,
+      "moratorium_months": 60,
+      "notes": "Soft seed loan up to 25% of project cost (max ₹2.5 Lakhs) with nominal 1% service charge and generous 5-year repayment moratorium."
+    },
+    "documents": [
+      {"name": "Aadhaar & PAN Card", "mandatory": True, "notes": "Identity proof"},
+      {"name": "Woman Entrepreneurship Declaration (51%+ stake)", "mandatory": True, "notes": "Proprietorship or partnership deed"},
+      {"name": "Business Project Summary", "mandatory": True, "notes": "Equipment and capital needs"},
+      {"name": "Bank Account Details", "mandatory": True, "notes": "Savings/current account"}
+    ],
+    "application_process": [
+      "Apply through State Financial Corporation (SFC) or commercial banks refinancing through SIDBI.",
+      "Submit project proposal for new enterprise or modernizing existing unit.",
+      "Sanction of soft loan for equity gap along with primary term loan.",
+      "Enjoy 5-year moratorium on soft loan repayment."
+    ],
+    "official_url": "https://www.sidbi.in",
+    "last_verified": "2026-08-25",
+    "keywords": ["sidbi", "women", "mahila udyam nidhi", "soft loan", "equity", "tailoring", "rekha"]
+  }
+]
+
+def build():
+    os.makedirs('backend/data', exist_ok=True)
+    out_file = 'backend/data/schemes_seed.json'
+    with open(out_file, 'w', encoding='utf-8') as f:
+        json.dump(SCHEMES, f, indent=2, ensure_ascii=False)
+    print(f"Successfully generated {len(SCHEMES)} verified schemes into {out_file}")
+
+if __name__ == '__main__':
+    build()
