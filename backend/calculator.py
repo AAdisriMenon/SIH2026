@@ -9,20 +9,23 @@ from .models import FinancialCalculationRequest, FinancialCalculationResult, Amo
 def calculate_finance(
     project_cost: float,
     scheme_financials: Optional[Dict[str, Any]] = None,
-    custom_subsidy_pct: Optional[float] = None,
     custom_margin_pct: Optional[float] = None,
-    interest_rate_pct: float = 6.0,
-    tenure_years: int = 5
+    custom_subsidy_pct: Optional[float] = None,
+    interest_rate_pct: float = 8.0,
+    tenure_years: int = 7,
+    moratorium_months: Optional[int] = None,
+    loan_category: Optional[str] = None
 ) -> FinancialCalculationResult:
     """
-    Computes financial breakdown and monthly EMI with yearly amortization.
+    Computes reducing-balance EMI, capital subsidy, promoter margin contribution,
+    moratorium tenure, and year-by-year amortization.
     """
     sf = scheme_financials or {}
-    
-    # 1. Determine Margin Money %
+
+    # 1. Determine Margin Money Amount
     margin_pct = custom_margin_pct if custom_margin_pct is not None else sf.get("margin_money_percent", 10.0)
     margin_amount = round(project_cost * (margin_pct / 100.0), 2)
-    
+
     # 2. Determine Capital Subsidy
     subsidy_pct = custom_subsidy_pct if custom_subsidy_pct is not None else sf.get("subsidy_percent", 0.0)
     max_subsidy_cap = sf.get("max_subsidy_amount", 0.0)
@@ -47,7 +50,18 @@ def calculate_finance(
     tenure_y = max(1, min(tenure_years, sf.get("max_tenure_years", 10)))
     total_months = tenure_y * 12
 
-    # 5. Reducing Balance Monthly EMI calculation
+    # 5. Moratorium & Category Handling (PS #26092 Micro Finance <= 1.40L vs Term Loan)
+    moratorium_m = moratorium_months if moratorium_months is not None else sf.get("moratorium_months", 0)
+    loan_cat = loan_category or sf.get("loan_category") or ("Micro Finance" if loan_amount <= 140000.0 else "Term Loan")
+    
+    if loan_cat == "Educational Loan":
+        moratorium_note = "Course duration + 1 year, or up to 6 months where repayment has started"
+    elif moratorium_m > 0:
+        moratorium_note = f"{moratorium_m} Months Repayment Moratorium (Repayment holiday post-sanction)"
+    else:
+        moratorium_note = "Standard monthly repayment cycle without moratorium"
+
+    # 6. Reducing Balance Monthly EMI calculation
     if loan_amount <= 0:
         monthly_emi = 0.0
         total_interest = 0.0
@@ -78,6 +92,9 @@ def calculate_finance(
         total_repayment=total_repayment,
         tenure_years=tenure_y,
         interest_rate_percent=effective_rate,
+        moratorium_months=moratorium_m,
+        moratorium_note=moratorium_note,
+        loan_category=loan_cat,
         yearly_schedule=yearly_schedule
     )
 

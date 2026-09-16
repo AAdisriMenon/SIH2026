@@ -126,13 +126,26 @@ class TestRulesEngine(unittest.TestCase):
         pwd_verdict = next(v for v in verdicts_non if v.criterion == "Disability (Divyangjan)")
         self.assertEqual(pwd_verdict.status, "FAIL")
 
+    def test_persona_pooja(self):
+        """Pooja: SC Student, Female, Age 22, ₹2.0L income, Higher Education, ₹8.0L cost."""
+        pooja = UserProfile(
+            name="Pooja", category="SC", gender="Female", age=22,
+            annual_income=200000, is_pwd=False,
+            business_idea="Pursuing M.Tech in Computer Science requiring semester fees and hostel accommodation.",
+            business_sector="Education", loan_purpose="education",
+            project_cost=800000, education="Graduate"
+        )
+        edu_scheme = self.schemes_by_id.get("nsfdc-education-loan")
+        status, verdicts, _ = evaluate_scheme(pooja, edu_scheme)
+        self.assertEqual(status, "ELIGIBLE", "Pooja must be ELIGIBLE for NSFDC Educational Loan")
+
     def test_income_boundary_borderline(self):
         """Testing borderline buffer: income within 15% over ceiling becomes BORDERLINE."""
-        # NSFDC income ceiling is ₹3,00,000.
-        # An applicant with ₹3,20,000 is 6.6% over -> must be BORDERLINE, not hard FAIL.
+        # Current official NSFDC family income ceiling is ₹5,00,000.
+        # An applicant with ₹5,30,000 is 6.0% over -> must be BORDERLINE, not hard FAIL.
         applicant = UserProfile(
             name="BorderlineUser", category="SC", gender="Male", age=30,
-            annual_income=320000, is_pwd=False,
+            annual_income=530000, is_pwd=False,
             business_idea="Small retail shop", business_sector="Trading",
             project_cost=200000, education="Class 10"
         )

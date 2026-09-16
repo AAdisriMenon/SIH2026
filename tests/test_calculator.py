@@ -8,6 +8,13 @@ Verifies:
 5. Zero Interest Rate Edge Cases
 """
 import unittest
+import sys
+import os
+
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
+
 from backend.calculator import calculate_finance
 
 class TestCalculator(unittest.TestCase):
@@ -75,6 +82,31 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(res.monthly_emi, 1875.0)
         self.assertEqual(res.total_interest, 0.0)
         self.assertEqual(res.total_repayment, 45000.0)
+
+    def test_moratorium_handling(self):
+        """Verify moratorium months, explanatory note, and loan category deduction."""
+        # 1. Micro Finance with 6 months moratorium
+        res_micro = calculate_finance(
+            project_cost=100000.0,
+            moratorium_months=6,
+            interest_rate_pct=5.0,
+            tenure_years=3
+        )
+        self.assertEqual(res_micro.moratorium_months, 6)
+        self.assertEqual(res_micro.loan_category, "Micro Finance")
+        self.assertIn("6 Months Repayment Moratorium", res_micro.moratorium_note)
+
+        # 2. Educational Loan with official moratorium wording
+        res_edu = calculate_finance(
+            project_cost=1500000.0,
+            moratorium_months=12,
+            interest_rate_pct=6.5,
+            tenure_years=10,
+            loan_category="Educational Loan"
+        )
+        self.assertEqual(res_edu.moratorium_months, 12)
+        self.assertEqual(res_edu.loan_category, "Educational Loan")
+        self.assertIn("Course duration + 1 year, or up to 6 months where repayment has started", res_edu.moratorium_note)
 
 if __name__ == "__main__":
     unittest.main()

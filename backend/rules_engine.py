@@ -241,6 +241,16 @@ def evaluate_scheme(profile: UserProfile, scheme: Dict[str, Any]) -> Tuple[str, 
     eligible_sectors = [s.lower() for s in rules.get("eligible_sectors", ["all"])]
     user_sector = (profile.business_sector or "").lower()
     
+    SECTOR_MAPPINGS = {
+        "tailoring/garments": ["manufacturing", "services", "trading", "textiles", "tailoring", "garments"],
+        "artisans/handicrafts": ["manufacturing", "services", "crafts", "artisans", "handicrafts"],
+        "food processing": ["manufacturing", "services", "agriculture/allied", "agri-allied", "food processing"],
+        "workshop": ["manufacturing", "services", "transport", "workshop"],
+        "it/computer": ["services", "it/computer", "it/tech"],
+        "street vending": ["trading", "services", "street vending"],
+        "education": ["education", "higher education", "technical degrees", "services"]
+    }
+    
     sector_match = False
     if "all" in eligible_sectors:
         sector_match = True
@@ -249,12 +259,21 @@ def evaluate_scheme(profile: UserProfile, scheme: Dict[str, Any]) -> Tuple[str, 
             if es in user_sector or user_sector in es:
                 sector_match = True
                 break
+        
+        if not sector_match and user_sector in SECTOR_MAPPINGS:
+            aliases = SECTOR_MAPPINGS[user_sector]
+            for es in eligible_sectors:
+                if es in aliases or any(a in es for a in aliases):
+                    sector_match = True
+                    break
+
         # Also check business idea keywords
-        idea_lower = (profile.business_idea or "").lower()
-        for es in eligible_sectors:
-            if any(k in idea_lower for k in es.split('/')):
-                sector_match = True
-                break
+        if not sector_match:
+            idea_lower = (profile.business_idea or "").lower()
+            for es in eligible_sectors:
+                if any(k in idea_lower for k in es.split('/')):
+                    sector_match = True
+                    break
 
     if sector_match:
         verdicts.append(RuleClauseResult(

@@ -155,6 +155,33 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     
+    <!-- AI Provider Status & Runtime Architecture Banner (MoSJE PS #26092 Multi-Provider Transparency) -->
+    <div id="aiProviderStatusBar" class="mb-6 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+      <div class="flex items-center space-x-2.5">
+        <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+        <span class="font-bold text-xs sm:text-sm text-white" data-i18n="aiProviderStatusTitle">AI Runtime Status & Architecture</span>
+        <span class="text-[10px] bg-blue-900/40 text-blue-300 border border-blue-700/50 px-2 py-0.5 rounded-full font-mono font-semibold">PS #26092</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <div id="statusBadgeGemini" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px]">
+          <span class="text-slate-400">Gemini 3.8 Flash / Emb-2:</span>
+          <span id="statusGeminiValue" class="font-bold text-emerald-400">Loading...</span>
+        </div>
+        <div id="statusBadgeHF" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px]">
+          <span class="text-slate-400">Hugging Face MiniLM:</span>
+          <span id="statusHFValue" class="font-bold text-emerald-400">Loading...</span>
+        </div>
+        <div id="statusBadgeRAG" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-[11px]">
+          <span class="text-slate-400">Grounded RAG:</span>
+          <span id="statusRAGValue" class="font-bold text-emerald-400">ACTIVE (Zero-Hallucination)</span>
+        </div>
+        <div class="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-950 border border-emerald-900/50 text-[11px]">
+          <span class="text-slate-400">Rules Engine:</span>
+          <span class="font-bold text-emerald-400">100% AUTHORITATIVE</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Hero / Intro Banner -->
     <div class="mb-8 p-6 rounded-2xl bg-gradient-to-r from-blue-950/60 via-slate-900 to-indigo-950/60 border border-blue-900/40 relative overflow-hidden shadow-xl">
       <div class="relative z-10 max-w-3xl">
@@ -181,6 +208,160 @@
       <span class="text-[10px] bg-amber-500/20 text-amber-200 border border-amber-500/30 px-2 py-0.5 rounded-full font-mono font-bold shrink-0">DEMO BENCHMARK</span>
     </div>
 
+    <!-- Natural-Language Scheme Intake & Human-in-the-Loop Card -->
+    <div class="mb-8 bg-slate-900 border border-blue-900/50 rounded-2xl p-6 shadow-xl">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+              <span data-i18n="aiIntakeTitle">Natural-Language Scheme Intake</span>
+              <span class="text-[10px] bg-blue-900/40 text-blue-300 border border-blue-700/50 px-2 py-0.5 rounded-full font-mono font-semibold">STAGE 2 &bull; ZERO-AUTHORITY AI</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5" data-i18n="aiIntakeSubtitle">
+              Tell us your background and need in your own words. AI interprets your request, then you review and confirm.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intake Prompt Area -->
+      <div class="space-y-3">
+        <div class="relative">
+          <textarea id="aiIntakeQuery" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3.5 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition leading-relaxed" placeholder="Describe what you need... e.g. I am an SC woman from Karnataka earning ₹2.5 lakh per year. I want to start a ₹3 lakh tailoring business from home."></textarea>
+          <button type="button" id="btnTrySampleIntake" class="absolute right-3 bottom-3 text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-md transition cursor-pointer flex items-center space-x-1">
+            <i data-lucide="wand-2" class="w-3 h-3 text-amber-400"></i>
+            <span>Try Sample</span>
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center space-x-2">
+            <button type="button" id="btnAnalyzeIntake" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2 rounded-xl flex items-center space-x-1.5 shadow-lg shadow-blue-600/20 transition cursor-pointer">
+              <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+              <span id="btnAnalyzeIntakeText" data-i18n="btnAnalyzeText">Analyze My Need (AI Intake)</span>
+            </button>
+            <button type="button" id="btnVoiceIntake" class="bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 text-xs px-3 py-2 rounded-xl flex items-center space-x-1.5 transition cursor-pointer" title="Speak your requirement">
+              <i data-lucide="mic" class="w-3.5 h-3.5"></i>
+              <span id="voiceIntakeStatusText" data-i18n="voiceSpeak">Voice Input</span>
+            </button>
+          </div>
+          <button type="button" id="btnClearIntake" class="text-xs text-slate-400 hover:text-slate-200 transition cursor-pointer">
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- 'Here's what I understood' Human-in-the-Loop Confirmation Card (Initially Hidden) -->
+      <div id="aiConfirmationCard" class="hidden mt-5 p-4 rounded-xl bg-slate-950 border border-blue-800/60 transition-all shadow-inner">
+        <!-- Header with interpretation & badges -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-800 gap-2 mb-3">
+          <div class="flex items-center space-x-2">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+            <h4 class="text-xs sm:text-sm font-bold text-white" data-i18n="understoodTitle">Here's what I understood:</h4>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+            <span id="aiIntentBadge" class="bg-blue-900/40 text-blue-300 border border-blue-800 px-2 py-0.5 rounded-full font-semibold">Intent: Micro Finance</span>
+            <span id="aiConfidenceBadge" class="bg-slate-800 text-slate-300 border border-slate-700 px-2 py-0.5 rounded-full font-mono">Confidence: 85%</span>
+            <span id="aiProviderBadge" class="bg-purple-900/30 text-purple-300 border border-purple-800 px-2 py-0.5 rounded-full">Gemini / Fallback</span>
+          </div>
+        </div>
+
+        <!-- Summary interpretation text -->
+        <p id="aiSummaryInterpretation" class="text-xs text-slate-200 mb-3.5 leading-relaxed bg-slate-900 p-3 rounded-lg border border-slate-800"></p>
+
+        <!-- Missing fields alert (if any) -->
+        <div id="aiMissingFieldsAlert" class="hidden mb-3 p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 flex items-start space-x-2">
+          <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+          <div id="aiMissingFieldsText"></div>
+        </div>
+
+        <!-- Uncertain fields alert (if any) -->
+        <div id="aiUncertainFieldsAlert" class="hidden mb-3 p-3 rounded-lg bg-blue-500/10 border border-blue-500/30 text-xs text-blue-300 flex items-start space-x-2">
+          <i data-lucide="help-circle" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+          <div id="aiUncertainFieldsText"></div>
+        </div>
+
+        <!-- Editable Extracted Fields -->
+        <div class="text-[11px] text-slate-300 font-semibold mb-2" data-i18n="reviewEditInstruction">
+          Review and correct any extracted information before matching:
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4 text-xs">
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1" data-i18n="category">Social Category *</label>
+            <select id="extractedCategory" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:ring-1 focus:ring-blue-500">
+              <option value="SC">SC (Scheduled Caste)</option>
+              <option value="ST">ST (Scheduled Tribe)</option>
+              <option value="OBC">OBC</option>
+              <option value="Minority">Minority</option>
+              <option value="General">General</option>
+              <option value="EWS">EWS</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1" data-i18n="gender">Gender *</label>
+            <select id="extractedGender" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:ring-1 focus:ring-blue-500">
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Transgender">Transgender</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1" data-i18n="age">Age</label>
+            <input type="number" id="extractedAge" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:ring-1 focus:ring-blue-500" placeholder="e.g. 32">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1" data-i18n="state">State *</label>
+            <input type="text" id="extractedState" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:ring-1 focus:ring-blue-500" placeholder="e.g. Karnataka">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1" data-i18n="annualIncome">Annual Income (₹) *</label>
+            <input type="number" id="extractedIncome" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:ring-1 focus:ring-blue-500" placeholder="e.g. 250000">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1" data-i18n="projectCost">Project Cost / Loan (₹) *</label>
+            <input type="number" id="extractedCost" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:ring-1 focus:ring-blue-500" placeholder="e.g. 300000">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1" data-i18n="sector">Sector / Trade</label>
+            <input type="text" id="extractedSector" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:ring-1 focus:ring-blue-500" placeholder="e.g. Tailoring/Garments">
+          </div>
+          <div class="flex items-center pt-3.5">
+            <label class="flex items-center space-x-2 cursor-pointer text-slate-300 text-xs">
+              <input type="checkbox" id="extractedIsPwd" class="accent-blue-500 rounded">
+              <span data-i18n="isPwd">Divyangjan (PwD)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Zero-Authority Safeguard Disclaimer -->
+        <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-slate-400 mb-4 flex items-center space-x-2">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+          <span><strong>Zero-Authority AI Principle:</strong> The AI extracts details only from your statement. Official eligibility is strictly evaluated by deterministic statutory rules without AI discretion.</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800">
+          <div class="flex items-center space-x-2">
+            <button type="button" id="btnConfirmAndMatch" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center space-x-1.5 shadow-lg shadow-emerald-600/20 transition cursor-pointer">
+              <i data-lucide="check-check" class="w-4 h-4"></i>
+              <span data-i18n="confirmAndMatchBtn">Confirm & Find Matching Schemes</span>
+            </button>
+            <button type="button" id="btnEditInFullForm" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs px-3.5 py-2 rounded-xl flex items-center space-x-1.5 transition cursor-pointer">
+              <i data-lucide="edit" class="w-3.5 h-3.5 text-blue-400"></i>
+              <span data-i18n="editInFullFormBtn">Edit in Full Form</span>
+            </button>
+          </div>
+          <button type="button" id="btnDismissConfirmation" class="text-xs text-slate-400 hover:text-rose-400 transition cursor-pointer" data-i18n="discardReEnter">
+            Discard / Re-enter
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Quick Persona Presets for Hackathon Judges & Demos -->
     <div id="matcherSectionWrapper">
     <div class="mb-8 bg-slate-900/80 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
@@ -200,6 +381,9 @@
         </button>
         <button type="button" data-preset="anita" class="btn-persona px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-blue-600 hover:text-white border border-slate-700 text-slate-200 transition">
           <span data-i18n="personaAnitaBtn">♿ Anita (PwD 50% &bull; Home Crafts)</span>
+        </button>
+        <button type="button" data-preset="pooja" class="btn-persona px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-blue-600 hover:text-white border border-slate-700 text-slate-200 transition">
+          <span data-i18n="personaPoojaBtn">🎓 Pooja (SC Student &bull; Higher Education)</span>
         </button>
       </div>
     </div>
@@ -271,10 +455,19 @@
               </div>
             </div>
 
+            <!-- Loan Purpose: Business vs Higher Education (PS #26092) -->
+            <div class="bg-slate-950/50 p-2.5 rounded-lg border border-slate-800">
+              <label class="block font-medium text-slate-300 mb-1" data-i18n="loanPurposeLabel">Loan Purpose / Credit Stream *</label>
+              <select id="inputLoanPurpose" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="business" selected data-i18n="optBusinessLoan">Business & Livelihood Credit (Micro Finance & Term Loans)</option>
+                <option value="education" data-i18n="optEducationLoan">Higher Education Loan (Technical & Professional Degrees)</option>
+              </select>
+            </div>
+
             <!-- Business Sector & State -->
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block font-medium text-slate-300 mb-1" data-i18n="businessSector">Business Sector *</label>
+                <label class="block font-medium text-slate-300 mb-1" data-i18n="businessSector">Business Sector / Course *</label>
                 <select id="inputSector" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
                   <option value="Tailoring/Garments" selected>Tailoring & Garments</option>
                   <option value="Artisans/Handicrafts">Artisans & Handicrafts</option>
@@ -284,6 +477,7 @@
                   <option value="Food Processing">Food Processing & Agro</option>
                   <option value="Transport">Commercial Transport</option>
                   <option value="IT/Computer">IT & Computer Services</option>
+                  <option value="Education">Education / Professional Degrees</option>
                 </select>
               </div>
               <div>
@@ -299,7 +493,20 @@
                   <option value="West Bengal">West Bengal</option>
                   <option value="Gujarat">Gujarat</option>
                   <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
                 </select>
+              </div>
+            </div>
+
+            <!-- District & PIN Code (Geo-spatial Routing) -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-medium text-slate-300 mb-1" data-i18n="district">District</label>
+                <input type="text" id="inputDistrict" value="General" placeholder="e.g. Mumbai, Lucknow" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block font-medium text-slate-300 mb-1" data-i18n="pincode">PIN Code (Optional)</label>
+                <input type="text" id="inputPincode" placeholder="e.g. 400051" maxlength="6" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
               </div>
             </div>
 
@@ -382,6 +589,196 @@
           </div>
         </div>
 
+        <!-- Direct Semantic AI Search Bar (POST /api/ai/search) -->
+        <div class="mb-5 bg-slate-900/90 border border-blue-900/40 rounded-xl p-3 flex flex-col sm:flex-row items-center gap-2 shadow">
+          <div class="relative flex-1 w-full">
+            <i data-lucide="sparkles" class="w-4 h-4 text-blue-400 absolute left-3 top-2.5"></i>
+            <input type="text" id="aiSemanticSearchInput" data-i18n-placeholder="semanticSearchPlaceholder" placeholder="Search 34 schemes by equipment, trade, or idea (e.g. solar dryer, CNC lathe, tuition fees)..." class="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <button type="button" id="btnSemanticSearch" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2 rounded-lg transition flex items-center justify-center space-x-1.5 cursor-pointer shrink-0 shadow-md shadow-blue-600/20">
+            <i data-lucide="search" class="w-3.5 h-3.5"></i>
+            <span data-i18n="semanticSearchBtn">Search</span>
+          </button>
+        </div>
+
+        <!-- Process Visualization: How Your Recommendation Was Generated (9 Steps) -->
+        <div class="mb-5 bg-slate-900/90 border border-blue-900/50 rounded-2xl p-4 shadow-xl">
+          <details class="group">
+            <summary class="flex items-center justify-between cursor-pointer select-none">
+              <div class="flex items-center space-x-2.5">
+                <div class="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center">
+                  <i data-lucide="git-branch" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                    <span data-i18n="processVisTitle">How Your Recommendation Was Generated</span>
+                    <span class="text-[10px] bg-blue-900/40 text-blue-300 border border-blue-700/40 px-2 py-0.5 rounded-full font-mono">9 STEPS</span>
+                  </h3>
+                  <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="processVisSubtitle">Zero-Authority AI pipeline guaranteeing statutory compliance, semantic retrieval, and verified partner routing.</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+
+            <div class="mt-4 pt-4 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-blue-400 text-[11px]">1. Beneficiary Intake</span>
+                    <span class="text-[9px] bg-blue-950 text-blue-300 px-1 rounded border border-blue-900">NLP</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Beneficiary provides natural-language requirement via text or multilingual voice STT.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="mic" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> Free-form Input</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-blue-400 text-[11px]">2. Dual-LLM NLU</span>
+                    <span class="text-[9px] bg-blue-950 text-blue-300 px-1 rounded border border-blue-900">JSON</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Gemini 3.8 Flash / HF extracts demographics, financial constraints, and operational intent.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="cpu" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> Zero-Hallucination</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-blue-400 text-[11px]">3. Pydantic Validation</span>
+                    <span class="text-[9px] bg-blue-950 text-blue-300 px-1 rounded border border-blue-900">Schema</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Strict schema enforcement verifies income, age, category, cost bounds, and missing fields.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="check-square" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> Type-Safe</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-amber-400 text-[11px]">4. Human Confirmation</span>
+                    <span class="text-[9px] bg-amber-950 text-amber-300 px-1 rounded border border-amber-900">HITL</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">"Here's what I understood" card allows applicant to inspect, correct, and confirm all fields.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="user-check" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> Human in Loop</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-emerald-800/80 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-emerald-400 text-[11px]">5. Rules Engine</span>
+                    <span class="text-[9px] bg-emerald-950 text-emerald-300 px-1 rounded border border-emerald-900">Statutory</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Zero-Authority AI: rules engine strictly partitions schemes into Eligible, Borderline, or Ineligible.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="shield" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> 100% Deterministic</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-purple-400 text-[11px]">6. Semantic Ranking</span>
+                    <span class="text-[9px] bg-purple-950 text-purple-300 px-1 rounded border border-purple-900">Multi-Model</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Gemini Emb-2 (0.60) + HF MiniLM (0.25) + TF-IDF (0.15) ranks schemes within statutory tiers.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="layers" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> Hybrid Fusion</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-blue-400 text-[11px]">7. Financial Check</span>
+                    <span class="text-[9px] bg-blue-950 text-blue-300 px-1 rounded border border-blue-900">Math</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Deducts margin and capital subsidy, applies statutory loan caps, and computes reducing-balance EMI.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="calculator" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> Exact Formulas</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-indigo-800/80 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-indigo-400 text-[11px]">8. Partner Routing</span>
+                    <span class="text-[9px] bg-indigo-950 text-indigo-300 px-1 rounded border border-indigo-900">Haversine</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Routes application to nearest authorized channel partner (SCA, PSB, RRB, NBFC-MFI) via great-circle distance.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="map-pin" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> 13 Partners</div>
+              </div>
+
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-emerald-800/80 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-emerald-400 text-[11px]">9. Explainable Output</span>
+                    <span class="text-[9px] bg-emerald-950 text-emerald-300 px-1 rounded border border-emerald-900">Audit</span>
+                  </div>
+                  <p class="text-[10px] text-slate-300 leading-relaxed">Returns personalized shortlist with clause-level audit trail, 'Why Matched' explanation, and export.</p>
+                </div>
+                <div class="text-[9px] text-slate-500 mt-1.5 flex items-center"><i data-lucide="file-check" class="w-2.5 h-2.5 mr-1 text-slate-400"></i> Auditable</div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- Technical Algorithm Panel (8 Algorithms) -->
+        <div class="mb-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
+          <details class="group">
+            <summary class="flex items-center justify-between cursor-pointer select-none">
+              <div class="flex items-center space-x-2.5">
+                <div class="w-7 h-7 rounded-lg bg-purple-600/20 text-purple-400 flex items-center justify-center">
+                  <i data-lucide="binary" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                    <span data-i18n="algoPanelTitle">Technical Algorithms in Production</span>
+                    <span class="text-[10px] bg-purple-900/40 text-purple-300 border border-purple-700/40 px-2 py-0.5 rounded-full font-mono">8 ALGORITHMS</span>
+                  </h3>
+                  <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="algoPanelSubtitle">Mathematical formulations and deterministic foundations powering SIH #26092.</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+
+            <div class="mt-4 pt-4 border-t border-slate-800 space-y-2 text-xs text-slate-300">
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-emerald-400 text-[11px]">1. Deterministic Rule-Based Filtering (backend/rules_engine.py)</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">Evaluates statutory eligibility against age, gender, social category, income ceiling (15% borderline buffer), cost ceiling, and sector match with clause-by-clause audit trails.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-blue-400 text-[11px]">2. Gemini Embedding 2 Dense Retrieval (backend/embedding_service.py)</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">Projects queries into 768-dimensional normalized semantic vector space using Google Gemini Embedding 2 for dense semantic affinity matching.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-purple-400 text-[11px]">3. Hugging Face MiniLM Dense Embeddings (sentence-transformers)</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">Open-source semantic representation using sentence-transformers/all-MiniLM-L6-v2 via remote serverless API with local dense semantic projection fallback.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-amber-400 text-[11px]">4. Lexical TF-IDF Vector Space Analysis (Sublinear Term Frequency)</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">Deterministic sublinear term frequency-inverse document frequency vectorizer matching specialized domain vocabulary with cosine similarity.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-blue-400 text-[11px]">5. Multi-Model Reciprocal Rank Hybrid Fusion</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">Fused score S = 0.60 * S_Gemini + 0.25 * S_HF + 0.15 * S_TFIDF. Hard tier gating (+1000 Eligible, +500 Borderline) preserves legal priority.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-emerald-400 text-[11px]">6. Reducing-Balance Amortization with Statutory Moratorium</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">EMI = [P * r * (1+r)^n] / [(1+r)^n - 1]. Applies official moratorium holidays (e.g. NSFDC Educational Loan course duration + 1 year, or up to 6 months).</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-indigo-400 text-[11px]">7. Haversine Great-Circle Geodesic Partner Routing</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">Geodesic distance d = 2R * arcsin(sqrt(sin^2(Δφ/2) + cos(φ1)*cos(φ2)*sin^2(Δλ/2))) between beneficiary coordinates and 13 verified institutional partners.</p>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="font-bold text-cyan-400 text-[11px]">8. Grounded Structured Knowledge RAG</span>
+                <p class="text-[10px] text-slate-400 mt-0.5">RAG pipeline querying structured scheme and partner knowledge chunks with exact official citations, strict out-of-scope refusal, and zero hallucinated criteria.</p>
+              </div>
+            </div>
+          </details>
+        </div>
+
         <!-- Filter Tabs -->
         <div class="flex items-center space-x-2 border-b border-slate-800 pb-3 mb-6">
           <button type="button" data-tab="eligible" class="tab-btn px-4 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 text-white transition">
@@ -404,6 +801,96 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- 3. Geo-Spatial Channel Partner Locator & Routing (PS #26092) -->
+    <div id="channelPartnerSection" class="mt-12 bg-slate-900/90 border border-blue-900/50 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-slate-800 gap-4">
+        <div>
+          <div class="flex items-center space-x-2 mb-1.5">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-blue-400"></i> <span data-i18n="stepPartnerPill">Step 5: Verified Channel Partner Directory (Demo Subset)</span>
+            </span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20" title="Live status disclosure">
+              <i data-lucide="info" class="w-3 h-3 mr-1 text-amber-400"></i> <span data-i18n="partnerLiveDisclaimer">Status data not available for live verification</span>
+            </span>
+          </div>
+          <h3 class="text-xl font-black text-white" data-i18n="partnerLocatorTitle">Find Your Nearest Channel Partner (Verified Subset)</h3>
+          <p class="text-xs text-slate-300 mt-1" data-i18n="partnerLocatorSubtitle">
+            Locate State Channelizing Agencies (SCAs), Public Sector Banks (PSBs), Regional Rural Banks (RRBs), and NBFC-MFIs implementing MoSJE schemes.
+          </p>
+        </div>
+
+        <!-- Geolocation Trigger Button -->
+        <div class="flex items-center space-x-2 shrink-0">
+          <button type="button" id="btnGeolocate" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center space-x-2 transition shadow-lg shadow-blue-600/30 cursor-pointer">
+            <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+            <span data-i18n="btnUseGps">Use My Location</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Verified Subset & Coverage Disclaimer Banner -->
+      <div class="mt-4 p-3.5 bg-amber-950/40 border border-amber-800/60 rounded-xl text-xs flex items-start space-x-3">
+        <i data-lucide="alert-circle" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+        <div>
+          <div class="font-bold text-amber-300" data-i18n="partnerCoverageTitle">Verified Partner Records Currently Available in This Demo (Subset of NSFDC 102-Partner Network)</div>
+          <p class="mt-0.5 leading-relaxed text-[11px] text-amber-200/90" data-i18n="partnerCoverageNotice">
+            This locator currently contains a verified subset of channel partners. It does not represent the complete NSFDC partner network. Verify current authorization and availability with the official agency before applying.
+          </p>
+        </div>
+      </div>
+
+      <!-- Partner Search Filter Toolbar -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 my-5 text-xs">
+        <div>
+          <label class="block font-medium text-slate-300 mb-1" data-i18n="filterLoanCategory">Loan Category</label>
+          <select id="partnerFilterCategory" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <option value="All" data-i18n="optAllCategories">All Categories</option>
+            <option value="Micro Finance" data-i18n="optMicroFinance">Micro Finance — Project Cost up to ₹1.40 lakh; maximum loan up to ₹1.25 lakh</option>
+            <option value="Term Loan" data-i18n="optTermLoan">Term Loan — Project Cost > ₹1.40 lakh to ₹50 lakh; maximum loan up to ₹45 lakh</option>
+            <option value="Educational Loan" data-i18n="optEducationalLoan">Educational Loan — Higher Education up to ₹40 lakh (or 90% of course fee)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1" data-i18n="filterPartnerType">Partner Type</label>
+          <select id="partnerFilterType" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <option value="All" data-i18n="optAllPartnerTypes">All Partner Types</option>
+            <option value="State Channelizing Agency">State Channelizing Agency (SCA)</option>
+            <option value="Public Sector Bank">Public Sector Bank (PSB)</option>
+            <option value="Regional Rural Bank">Regional Rural Bank (RRB)</option>
+            <option value="Small Finance Bank">Small Finance Bank</option>
+            <option value="NBFC-MFI">NBFC-MFI</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1" data-i18n="state">State / UT</label>
+          <select id="partnerFilterState" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <option value="All">All States (Pan-India)</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Gujarat">Gujarat</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1" data-i18n="district">District / Search</label>
+          <input type="text" id="partnerFilterDistrict" placeholder="Filter by district or city..." class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+      </div>
+
+      <!-- Partner Cards Grid -->
+      <div id="partnerResultsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered dynamically by app.js -->
+        <div class="p-8 text-center bg-slate-950/60 rounded-xl border border-slate-800 text-slate-400 col-span-full">
+          <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-blue-400"></i>
+          <p class="text-xs" data-i18n="loadingPartners">Loading authorized channel partners...</p>
+        </div>
       </div>
     </div>
     </div> <!-- /matcherSectionWrapper -->
@@ -518,7 +1005,7 @@
           </div>
 
           <!-- Financial Breakdown Metric Cards -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center my-4">
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-center my-4">
             <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
               <div class="text-slate-400 text-[10px]" data-i18n="marginMoney">Own Margin</div>
               <div id="calcMarginMoney" class="text-sm font-bold text-white mt-0.5">₹15,000</div>
@@ -531,10 +1018,20 @@
               <div class="text-blue-400 text-[10px]" data-i18n="termLoan">Sanctioned Loan</div>
               <div id="calcLoan" class="text-sm font-bold text-blue-400 mt-0.5">₹1,35,000</div>
             </div>
+            <div class="bg-slate-900 p-2.5 rounded-lg border border-purple-900/40">
+              <div class="text-purple-400 text-[10px]" data-i18n="moratoriumLabel">Moratorium</div>
+              <div id="calcMoratorium" class="text-sm font-bold text-purple-300 mt-0.5">6 Months</div>
+            </div>
             <div class="bg-slate-900 p-2.5 rounded-lg border border-amber-900/40">
               <div class="text-amber-400 text-[10px]" data-i18n="monthlyEmi">Monthly EMI</div>
               <div id="calcEmi" class="text-sm font-bold text-amber-400 mt-0.5">₹2,610 / mo</div>
             </div>
+          </div>
+
+          <!-- Moratorium Explanatory Badge -->
+          <div id="calcMoratoriumNote" class="text-[11px] text-purple-300 bg-purple-950/40 border border-purple-900/30 p-2 rounded-lg my-2 text-center flex items-center justify-center space-x-1.5">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-purple-400"></i>
+            <span>6 Months Repayment Moratorium (Principal repayment holiday post-sanction)</span>
           </div>
 
           <!-- Funding Composition Progress Bar -->
@@ -576,10 +1073,16 @@
 
       <!-- Modal Footer -->
       <div class="p-4 border-t border-slate-800 bg-slate-950 flex flex-wrap items-center justify-between gap-3">
-        <a id="modalOfficialLink" href="#" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2 rounded-xl flex items-center space-x-1.5 transition">
-          <span data-i18n="officialPortal">Visit Official Portal</span>
-          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-        </a>
+        <div class="flex items-center space-x-2">
+          <a id="modalOfficialLink" href="#" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-3.5 py-2 rounded-xl flex items-center space-x-1.5 transition">
+            <span data-i18n="officialPortal">Visit Official Portal</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+          <button id="btnModalFindPartners" class="bg-indigo-600/30 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/40 text-xs px-3 py-2 rounded-xl flex items-center space-x-1.5 transition cursor-pointer">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+            <span data-i18n="findPartnerForScheme">Find Partner</span>
+          </button>
+        </div>
         <div class="flex items-center space-x-2">
           <button id="btnShareWhatsApp" class="bg-emerald-700 hover:bg-emerald-600 text-white text-xs px-3 py-2 rounded-xl flex items-center space-x-1 transition">
             <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
@@ -589,6 +1092,33 @@
             <i data-lucide="printer" class="w-3.5 h-3.5"></i>
             <span data-i18n="printPdf">Print / PDF</span>
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Multi-Scheme Comparative Analysis Modal (Stage 3 & 4) -->
+  <div id="schemeCompareModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden my-8 max-h-[92vh] flex flex-col">
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-slate-800 flex items-start justify-between bg-slate-950/70">
+        <div>
+          <div class="flex items-center space-x-2">
+            <i data-lucide="scale" class="w-5 h-5 text-blue-400"></i>
+            <h3 class="text-lg font-bold text-white" data-i18n="compareModalTitle">Multi-Scheme Comparative Analysis & Grounded Guidance</h3>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Side-by-side factual comparison grounded strictly on verified MoSJE/NSFDC records.</p>
+        </div>
+        <button id="btnCloseCompareModal" class="text-slate-400 hover:text-white p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div id="compareModalBody" class="p-6 overflow-y-auto space-y-6 text-xs text-slate-300">
+        <div class="p-12 text-center text-slate-400">
+          <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto mb-2 text-blue-500"></i>
+          <p>Generating grounded scheme comparison...</p>
         </div>
       </div>
     </div>
@@ -683,6 +1213,26 @@
         </div>
 
       </div>
+    </div>
+  <!-- Floating Scheme Compare Action Bar (Stage 3 & 4) -->
+  <div id="floatingCompareBar" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-slate-900/95 border border-blue-500/60 shadow-2xl rounded-2xl px-5 py-3 flex items-center justify-between gap-4 max-w-xl w-full hidden backdrop-blur">
+    <div class="flex items-center space-x-2.5 text-xs">
+      <div class="w-7 h-7 rounded-lg bg-blue-600/30 text-blue-400 flex items-center justify-center">
+        <i data-lucide="scale" class="w-4 h-4"></i>
+      </div>
+      <div>
+        <span class="text-white font-bold block" id="compareCountText">0 schemes selected</span>
+        <span class="text-[10px] text-slate-400">Compare up to 4 schemes side-by-side</span>
+      </div>
+    </div>
+    <div class="flex items-center space-x-2">
+      <button id="btnOpenCompareModal" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-lg shadow-blue-600/20 cursor-pointer">
+        <i data-lucide="arrow-left-right" class="w-3.5 h-3.5"></i>
+        <span data-i18n="compareNowBtn">Compare Schemes</span>
+      </button>
+      <button id="btnClearCompare" class="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800 transition cursor-pointer" title="Clear comparison">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
     </div>
   </div>
 

@@ -1,0 +1,525 @@
+[
+  {
+    "id": "sca-mpbcdc-mh",
+    "name": "Mahatma Phule Backward Classes Development Corporation (MPBCDC)",
+    "type": "State Channelizing Agency (SCA)",
+    "state": "Maharashtra",
+    "district": "Mumbai",
+    "address": "Supreme Court Road, Bandra East, Mumbai, Maharashtra",
+    "pincode": "400051",
+    "latitude": 19.0607,
+    "longitude": 72.853,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "nsfdc-education-loan",
+      "nsfdc-green-business",
+      "nsfdc-lvy",
+      "nsfdc-may"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "022-26591621",
+      "email": "md@mpbcdc.gov.in",
+      "portal": "https://mpbcdc.mahonline.gov.in"
+    },
+    "authorization_status": "AUTHORIZED_SCA",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "Minimum 100% cumulative utilization level of previously disbursed funds",
+      "net_npa_limit": "Not Applicable to State Channelizing Agency",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "sca-upsfdc-up",
+    "name": "Uttar Pradesh Scheduled Castes Finance & Development Corporation (UPSFDC)",
+    "type": "State Channelizing Agency (SCA)",
+    "state": "Uttar Pradesh",
+    "district": "Lucknow",
+    "address": "B-2, Picup Bhawan, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh",
+    "pincode": "226010",
+    "latitude": 26.8667,
+    "longitude": 80.9958,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "nsfdc-education-loan",
+      "nsfdc-green-business",
+      "nsfdc-lvy"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "0522-2720845",
+      "email": "upsfdc_lucknow@rediffmail.com",
+      "portal": "https://upsfdc.up.gov.in"
+    },
+    "authorization_status": "AUTHORIZED_SCA",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "Statutory state nodal allocation",
+      "net_npa_limit": "Not Applicable to State Corporation",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "sca-tahdco-tn",
+    "name": "Tamil Nadu Adi Dravidar Housing and Development Corporation (TAHDCO)",
+    "type": "State Channelizing Agency (SCA)",
+    "state": "Tamil Nadu",
+    "district": "Chennai",
+    "address": "No. 31, Cenotaph Road, Teynampet, Chennai, Tamil Nadu",
+    "pincode": "600018",
+    "latitude": 13.0305,
+    "longitude": 80.2442,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "nsfdc-education-loan",
+      "nsfdc-lvy"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "044-24310860",
+      "email": "tahdco@tn.gov.in",
+      "portal": "https://tahdco.tn.gov.in"
+    },
+    "authorization_status": "AUTHORIZED_SCA",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "State annual budget guarantee",
+      "net_npa_limit": "Not Applicable to State Corporation",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "sca-dr-ambedkar-ka",
+    "name": "Dr. B.R. Ambedkar Development Corporation Ltd.",
+    "type": "State Channelizing Agency (SCA)",
+    "state": "Karnataka",
+    "district": "Bangalore",
+    "address": "9th Floor, Vishveshwaraiah Mini Tower, Dr. Ambedkar Veedhi, Bengaluru, Karnataka",
+    "pincode": "560001",
+    "latitude": 12.9791,
+    "longitude": 77.5913,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "nsfdc-education-loan",
+      "nsfdc-green-business"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "080-22864881",
+      "email": "md@adcl.karnataka.gov.in",
+      "portal": "https://adcl.karnataka.gov.in"
+    },
+    "authorization_status": "AUTHORIZED_SCA",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "Statutory state nodal allocation",
+      "net_npa_limit": "Not Applicable to State Corporation",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "sca-ksdcc-kl",
+    "name": "Kerala State Development Corporation for SC/ST Ltd.",
+    "type": "State Channelizing Agency (SCA)",
+    "state": "Kerala",
+    "district": "Thiruvananthapuram",
+    "address": "Town Hall Road, Ayyanthole, Thrissur / Thiruvananthapuram Regional Office, Kerala",
+    "pincode": "695001",
+    "latitude": 8.5061,
+    "longitude": 76.9575,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "nsfdc-education-loan",
+      "nsfdc-lvy"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "0487-2364024",
+      "email": "kscstdc@gmail.com",
+      "portal": "https://kscstdc.kerala.gov.in"
+    },
+    "authorization_status": "AUTHORIZED_SCA",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "Statutory state nodal allocation",
+      "net_npa_limit": "Not Applicable to State Corporation",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "psb-sbi-pan-india",
+    "name": "State Bank of India (SBI) - Concessional Micro & SME Credit Division",
+    "type": "Public Sector Bank (PSB)",
+    "state": "All",
+    "district": "All",
+    "address": "State Bank Bhavan, Madame Cama Road, Nariman Point, Mumbai & All District Lead Branches",
+    "pincode": "400021",
+    "latitude": 18.9284,
+    "longitude": 72.8228,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-education-loan",
+      "pmegp-scheme",
+      "stand-up-india",
+      "mudra-shishu",
+      "mudra-kishore",
+      "mudra-tarun",
+      "pm-vishwakarma"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "1800-1234 / 1800-2100",
+      "email": "customercare@sbi.co.in",
+      "portal": "https://sbi.co.in/web/business/sme"
+    },
+    "authorization_status": "AUTHORIZED_PSB",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "MoU based channel partner credit lines",
+      "net_npa_limit": "Statutory Prudential Mandate: RBI Scheduled Commercial Bank Norms",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "psb-pnb-pan-india",
+    "name": "Punjab National Bank (PNB) - Priority Sector Lending Cell",
+    "type": "Public Sector Bank (PSB)",
+    "state": "All",
+    "district": "All",
+    "address": "Plot No 4, Sector 10, Dwarka, New Delhi & All District Circle Offices",
+    "pincode": "110075",
+    "latitude": 28.5833,
+    "longitude": 77.05,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-education-loan",
+      "pmegp-scheme",
+      "stand-up-india",
+      "mudra-shishu",
+      "mudra-kishore"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "1800-180-2222",
+      "email": "care@pnb.co.in",
+      "portal": "https://pnbindia.in"
+    },
+    "authorization_status": "AUTHORIZED_PSB",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "MoU based channel partner credit lines",
+      "net_npa_limit": "Statutory Prudential Mandate: RBI Scheduled Commercial Bank Norms",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "psb-bob-pan-india",
+    "name": "Bank of Baroda (BOB) - Financial Inclusion & Social Banking",
+    "type": "Public Sector Bank (PSB)",
+    "state": "All",
+    "district": "All",
+    "address": "Baroda Bhavan, R C Dutt Road, Alkapuri, Vadodara, Gujarat & All Zonal Offices",
+    "pincode": "390007",
+    "latitude": 22.3107,
+    "longitude": 73.1718,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-education-loan",
+      "pmegp-scheme",
+      "stand-up-india",
+      "mudra-kishore"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "1800-258-4455",
+      "email": "fib.ho@bankofbaroda.com",
+      "portal": "https://bankofbaroda.in"
+    },
+    "authorization_status": "AUTHORIZED_PSB",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "MoU based channel partner credit lines",
+      "net_npa_limit": "Statutory Prudential Mandate: RBI Scheduled Commercial Bank Norms",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "rrb-mh-gramin",
+    "name": "Maharashtra Gramin Bank (MGB)",
+    "type": "Regional Rural Bank (RRB)",
+    "state": "Maharashtra",
+    "district": "Nanded",
+    "address": "Head Office, Plot No. 42, Golani Market, Nanded, Maharashtra",
+    "pincode": "431601",
+    "latitude": 19.1557,
+    "longitude": 77.316,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "mudra-shishu",
+      "mudra-kishore"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "02462-242000",
+      "email": "mgb_ho@mahagramin.in",
+      "portal": "https://mahagramin.in"
+    },
+    "authorization_status": "AUTHORIZED_RRB",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": ">= 75% disbursement compliance",
+      "net_npa_limit": "Statutory Prudential Limit: <= 5% Net NPA per NSFDC Guidelines",
+      "profitability_criterion": "Operational profit in preceding financial year",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "rrb-aryavart-up",
+    "name": "Aryavart Bank (RRB Sponsored by Bank of India)",
+    "type": "Regional Rural Bank (RRB)",
+    "state": "Uttar Pradesh",
+    "district": "Lucknow",
+    "address": "Head Office, A-2/46, Vijay Khand, Gomti Nagar, Lucknow, Uttar Pradesh",
+    "pincode": "226010",
+    "latitude": 26.853,
+    "longitude": 81.002,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "mudra-shishu",
+      "mudra-kishore"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "0522-2398874",
+      "email": "fi.dept@aryavart-rrb.com",
+      "portal": "https://aryavart-rrb.com"
+    },
+    "authorization_status": "AUTHORIZED_RRB",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": ">= 75% disbursement compliance",
+      "net_npa_limit": "Statutory Prudential Limit: <= 5% Net NPA per NSFDC Guidelines",
+      "profitability_criterion": "Operational profit in preceding financial year",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "rrb-kerala-gramin",
+    "name": "Kerala Gramin Bank (KGB Sponsored by Canara Bank)",
+    "type": "Regional Rural Bank (RRB)",
+    "state": "Kerala",
+    "district": "Malappuram",
+    "address": "Head Office, KGB Towers, AK Road, Malappuram, Kerala",
+    "pincode": "676505",
+    "latitude": 11.0732,
+    "longitude": 76.074,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan",
+      "Educational Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-term-loan",
+      "nsfdc-msy",
+      "nsfdc-mcf",
+      "nsfdc-education-loan",
+      "mudra-shishu"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "0483-2733509",
+      "email": "kgbho@keralagbank.com",
+      "portal": "https://keralagbank.com"
+    },
+    "authorization_status": "AUTHORIZED_RRB",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": ">= 75% disbursement compliance",
+      "net_npa_limit": "Statutory Prudential Limit: <= 5% Net NPA per NSFDC Guidelines",
+      "profitability_criterion": "Operational profit in preceding financial year",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "sfb-au-small-finance",
+    "name": "AU Small Finance Bank - Micro & Livelihood Banking",
+    "type": "Small Finance Bank",
+    "state": "Rajasthan",
+    "district": "Jaipur",
+    "address": "19-A, Dhuleshwar Garden, Ajmer Road, Jaipur, Rajasthan",
+    "pincode": "302001",
+    "latitude": 26.9124,
+    "longitude": 75.7873,
+    "supported_loan_categories": [
+      "Micro Finance",
+      "Term Loan"
+    ],
+    "supported_schemes": [
+      "nsfdc-mcf",
+      "nsfdc-msy",
+      "mudra-shishu",
+      "mudra-kishore"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "1800-1200-1300",
+      "email": "customercare@aubank.in",
+      "portal": "https://aubank.in"
+    },
+    "authorization_status": "AUTHORIZED_SFB",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "Priority sector micro-credit target compliance",
+      "net_npa_limit": "Statutory Prudential Mandate: RBI Scheduled Commercial Bank Norms",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  },
+  {
+    "id": "mfi-nabfins-pan-india",
+    "name": "NABARD Financial Services Ltd. (NABFINS)",
+    "type": "NBFC-MFI",
+    "state": "All",
+    "district": "All",
+    "address": "#3072, 14th Cross, K.R. Road, Banashankari 2nd Stage, Bengaluru, Karnataka",
+    "pincode": "560070",
+    "latitude": 12.925,
+    "longitude": 77.575,
+    "supported_loan_categories": [
+      "Micro Finance"
+    ],
+    "supported_schemes": [
+      "nsfdc-mcf",
+      "nsfdc-msy",
+      "nhfdc-micro-credit",
+      "nmdfc-micro-finance"
+    ],
+    "official_source": "https://nsfdc.nic.in/en/channel-partners",
+    "verification_date": "2026-09-16",
+    "contact_info": {
+      "phone": "080-26970500",
+      "email": "ho@nabfins.org",
+      "portal": "https://nabfins.org"
+    },
+    "authorization_status": "AUTHORIZED_NBFC_MFI",
+    "rrb_eligibility_criteria": {
+      "no_overdues_to_nsfdc": true,
+      "fund_utilization_mandate": "Accredited SHG / JLG micro-finance disbursement",
+      "net_npa_limit": "Statutory Prudential Mandate: RBI Scheduled Commercial Bank Norms",
+      "criterion_type": "Statutory Prudential Criteria (Not Live Feed)"
+    },
+    "live_status_note": "Status data not available for live verification. Verified from latest official Gazette. Institutional inclusion does not guarantee loan disbursement.",
+    "coordinate_precision": "Approximate Nodal HQ",
+    "network_coverage_note": "Verified sample record from NSFDC 102-partner channel network"
+  }
+]

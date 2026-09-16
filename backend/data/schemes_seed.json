@@ -12,7 +12,7 @@
       "Female",
       "Transgender"
     ],
-    "summary": "Term loan assistance up to ₹50 Lakhs for viable income-generating projects in manufacturing, services, transport, and trading for Scheduled Caste entrepreneurs.",
+    "summary": "Term loan assistance up to ₹45 Lakh (project cost > ₹1.40 Lakh up to ₹50 Lakh) for viable income-generating projects for Scheduled Caste entrepreneurs at 8% p.a. interest.",
     "purpose": "Provide concessional credit for starting or expanding viable business enterprises, manufacturing units, service establishments, or purchasing commercial vehicles.",
     "rules": {
       "categories": [
@@ -26,9 +26,9 @@
       ],
       "min_age": 18,
       "max_age": 60,
-      "income_ceiling": 300000,
+      "income_ceiling": 500000.0,
       "disability_required": false,
-      "min_project_cost": 50000,
+      "min_project_cost": 140001,
       "max_project_cost": 5000000,
       "eligible_sectors": [
         "Manufacturing",
@@ -48,14 +48,16 @@
       ]
     },
     "financials": {
-      "max_loan_amount": 4500000,
+      "max_loan_amount": 4500000.0,
       "subsidy_percent": 0.0,
       "max_subsidy_amount": 0,
       "margin_money_percent": 10.0,
       "nsfdc_share_percent": 90.0,
-      "interest_rate_percent": 6.0,
-      "max_tenure_years": 10,
-      "moratorium_months": 12
+      "interest_rate_percent": 8.0,
+      "max_tenure_years": 7,
+      "moratorium_months": 6,
+      "loan_category": "Term Loan",
+      "notes": "Moratorium: 6-month moratorium (12 months for plantation/construction). Repayment within 7 years."
     },
     "documents": [
       {
@@ -90,11 +92,11 @@
       }
     ],
     "application_process": [
-      "Obtain application form from State Channelising Agency (SCA), RRB, or Nationalised Bank.",
-      "Submit DPR along with required KYC, Caste, and Income certificates.",
-      "SCA/Bank appraises project viability and forwards recommendation to NSFDC.",
-      "NSFDC sanctions concessional loan share and disburses via the lending agency.",
-      "Procure assets and submit utilization certificate."
+      "Apply online via MoSJE PM-SURAJ portal (pmsuraj.dosje.gov.in) or obtain physical application from State Channelising Agency (SCA) / partnered Bank branch.",
+      "Submit Detailed Project Report (DPR) along with required KYC, Caste, and Income certificates.",
+      "SCA or Partner Bank appraises project viability and forwards recommendation under NSFDC credit line.",
+      "Concessional loan share sanctioned and disbursed directly via the channelizing agency.",
+      "Asset procurement and submission of utilization certificate."
     ],
     "official_url": "https://nsfdc.nic.in/scheme",
     "last_verified": "2026-09-16",
@@ -109,7 +111,16 @@
       "nsfdc",
       "business",
       "suresh"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": true,
+    "source_type": "official_faq",
+    "source_url": "https://nsfdc.nic.in/faqs",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "nsfdc",
+    "scheme_classification": "MoSJE / NSFDC Scheme"
   },
   {
     "id": "nsfdc-msy",
@@ -132,7 +143,7 @@
       ],
       "min_age": 18,
       "max_age": 60,
-      "income_ceiling": 300000,
+      "income_ceiling": 500000.0,
       "disability_required": false,
       "min_project_cost": 10000,
       "max_project_cost": 140000,
@@ -160,7 +171,8 @@
       "nsfdc_share_percent": 100.0,
       "interest_rate_percent": 4.0,
       "max_tenure_years": 4,
-      "moratorium_months": 3
+      "moratorium_months": 3,
+      "loan_category": "Micro Finance"
     },
     "documents": [
       {
@@ -190,11 +202,11 @@
       }
     ],
     "application_process": [
-      "Contact the local District SCA office or designated Regional Rural Bank / Micro Finance Agency.",
-      "Fill MSY individual or SHG group loan requisition.",
-      "Verification of residence and caste status by field officer.",
-      "Sanction of micro-credit without collateral requirement.",
-      "Repayment in easy monthly instalments over 3 to 4 years."
+      "Apply through local District SCA office, designated Regional Rural Bank, or MoSJE PM-SURAJ portal.",
+      "Fill Mahila Samriddhi Yojana (MSY) loan requisition for individual or SHG group setup.",
+      "Verification of residence, OBC/SC caste certificate, and income ceiling compliance.",
+      "Sanction of micro-credit up to ₹1.40 Lakh without collateral requirement.",
+      "3-month repayment moratorium followed by quarterly or monthly repayment over 3 to 4 years."
     ],
     "official_url": "https://nsfdc.nic.in/scheme",
     "last_verified": "2026-09-16",
@@ -209,11 +221,22 @@
       "boutique",
       "stitching",
       "handicraft"
-    ]
+    ],
+    "loan_category": "Micro Finance",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": true,
+    "source_type": "historical_compendium",
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "source_date": "Historical Compendium",
+    "is_current": false,
+    "scheme_type": "nsfdc_historical",
+    "scheme_classification": "MoSJE / NSFDC Historical Scheme (Archived)",
+    "status": "HISTORICAL",
+    "historical_notice": "Historical scheme record from older MoSJE compendium (4.0% p.a.). Superceded by current official NSFDC Micro Credit Finance (6.5% p.a., max ₹1.25 lakh) under current guidelines."
   },
   {
     "id": "nsfdc-mcf",
-    "name": "Micro Credit Finance (MCF) Scheme",
+    "name": "Micro Credit Finance (Micro Finance) Scheme",
     "issuing_body": "National Scheduled Castes Finance and Development Corporation (NSFDC), MoSJE",
     "category_targets": [
       "SC"
@@ -224,7 +247,7 @@
       "Female",
       "Transgender"
     ],
-    "summary": "Micro-finance up to ₹1,40,000 per beneficiary for small trade, vending, artisan crafts, and tiny business activities for SC individuals.",
+    "summary": "Micro-credit assistance up to ₹1.25 Lakh (project cost up to ₹1.40 Lakh) for Scheduled Caste entrepreneurs and SHGs at 6.5% p.a. interest with 3-month moratorium.",
     "purpose": "Meet working capital and small equipment funding needs for micro-enterprises and traditional trades among SC families.",
     "rules": {
       "categories": [
@@ -258,14 +281,16 @@
       ]
     },
     "financials": {
-      "max_loan_amount": 140000,
+      "max_loan_amount": 125000.0,
       "subsidy_percent": 0.0,
       "max_subsidy_amount": 0,
       "margin_money_percent": 0.0,
       "nsfdc_share_percent": 100.0,
       "interest_rate_percent": 4.5,
       "max_tenure_years": 3,
-      "moratorium_months": 3
+      "moratorium_months": 3,
+      "loan_category": "Micro Finance",
+      "notes": "Repayment within 3 years including 3-month moratorium."
     },
     "documents": [
       {
@@ -296,7 +321,7 @@
       "Repay via quarterly or monthly instalments."
     ],
     "official_url": "https://nsfdc.nic.in/scheme",
-    "last_verified": "2026-09-16",
+    "last_verified": "2026-09-17",
     "keywords": [
       "micro credit",
       "sc",
@@ -305,7 +330,16 @@
       "artisan",
       "working capital",
       "tiny business"
-    ]
+    ],
+    "loan_category": "Micro Finance",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": true,
+    "source_type": "official_faq",
+    "source_url": "https://nsfdc.nic.in/faqs",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "nsfdc",
+    "scheme_classification": "MoSJE / NSFDC Scheme"
   },
   {
     "id": "nsfdc-green-business",
@@ -334,7 +368,7 @@
       ],
       "min_age": 18,
       "max_age": 60,
-      "income_ceiling": 300000,
+      "income_ceiling": 500000.0,
       "disability_required": false,
       "min_project_cost": 100000,
       "max_project_cost": 3000000,
@@ -363,7 +397,8 @@
       "nsfdc_share_percent": 90.0,
       "interest_rate_percent": 5.5,
       "max_tenure_years": 8,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -409,7 +444,16 @@
       "sc",
       "clean energy",
       "environment"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": true,
+    "source_type": "official_guidelines",
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "nsfdc",
+    "scheme_classification": "MoSJE / NSFDC Scheme"
   },
   {
     "id": "nsfdc-lvy",
@@ -438,7 +482,7 @@
       ],
       "min_age": 18,
       "max_age": 60,
-      "income_ceiling": 300000,
+      "income_ceiling": 500000.0,
       "disability_required": false,
       "min_project_cost": 25000,
       "max_project_cost": 500000,
@@ -465,7 +509,8 @@
       "nsfdc_share_percent": 90.0,
       "interest_rate_percent": 6.0,
       "max_tenure_years": 6,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -506,7 +551,16 @@
       "nsfdc",
       "workshop",
       "suresh"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": true,
+    "source_type": "official_guidelines",
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "nsfdc",
+    "scheme_classification": "MoSJE / NSFDC Scheme"
   },
   {
     "id": "nsfdc-may",
@@ -529,7 +583,7 @@
       ],
       "min_age": 18,
       "max_age": 60,
-      "income_ceiling": 300000,
+      "income_ceiling": 500000.0,
       "disability_required": false,
       "min_project_cost": 15000,
       "max_project_cost": 200000,
@@ -557,7 +611,8 @@
       "nsfdc_share_percent": 100.0,
       "interest_rate_percent": 4.0,
       "max_tenure_years": 4,
-      "moratorium_months": 3
+      "moratorium_months": 3,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -596,7 +651,135 @@
       "dairy",
       "micro finance",
       "rekha"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": true,
+    "source_type": "official_guidelines",
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "nsfdc",
+    "scheme_classification": "MoSJE / NSFDC Scheme"
+  },
+  {
+    "id": "nsfdc-education-loan",
+    "name": "NSFDC Educational Loan Scheme for Scheduled Castes",
+    "issuing_body": "NSFDC, Ministry of Social Justice and Empowerment",
+    "loan_category": "Educational Loan",
+    "category_targets": [
+      "SC"
+    ],
+    "gender_targets": [
+      "Any",
+      "Female",
+      "Male"
+    ],
+    "summary": "Concessional educational loan up to ₹40.0 Lakh (or 90% of course fee, whichever is less) at 6.5% p.a. for Scheduled Caste students pursuing full-time professional/technical courses in India or abroad.",
+    "purpose": "Enable SC students to pursue approved professional and technical higher education in India and abroad with up to ₹40 Lakh credit support at 6.5% interest rate.",
+    "rules": {
+      "categories": [
+        "SC"
+      ],
+      "gender": [
+        "any"
+      ],
+      "min_age": 16,
+      "max_age": 45,
+      "income_ceiling": 500000.0,
+      "min_project_cost": 25000.0,
+      "max_project_cost": 4500000.0,
+      "disability_required": false,
+      "eligible_sectors": [
+        "All",
+        "Education",
+        "Professional Studies",
+        "Technical Degrees",
+        "Higher Education"
+      ]
+    },
+    "financials": {
+      "max_loan_amount": 4000000.0,
+      "interest_rate_percent": 6.5,
+      "subsidy_percent": 0.0,
+      "max_subsidy_amount": 0.0,
+      "margin_money_percent": 10.0,
+      "max_tenure_years": 12,
+      "moratorium_months": 12,
+      "moratorium_rule": "Course duration + 1 year, or up to 6 months where repayment has started",
+      "loan_category": "Educational Loan",
+      "historical_rate_note": "Historical compendiums cited 4.0% with 0.5% female rebate under older ₹10L/₹20L limits. Current official NSFDC FAQ establishes 6.5% p.a. under the ₹40 Lakh limit.",
+      "notes": "Course duration + 1 year moratorium, or up to 6 months where loan has been disbursed and repayment has started. Repayment 10–12 years."
+    },
+    "documents": [
+      {
+        "name": "Aadhaar Card",
+        "mandatory": true,
+        "notes": "Identity and address proof of student"
+      },
+      {
+        "name": "SC Caste Certificate",
+        "mandatory": true,
+        "notes": "Valid SC caste certificate issued by competent authority"
+      },
+      {
+        "name": "Admission Confirmation / Offer Letter",
+        "mandatory": true,
+        "notes": "From AICTE/UGC/accredited university in India or abroad"
+      },
+      {
+        "name": "Fee Structure Breakdown",
+        "mandatory": true,
+        "notes": "Official semester-wise tuition, lab, and living expense breakdown"
+      },
+      {
+        "name": "Income Certificate / Self Declaration",
+        "mandatory": false,
+        "notes": "Family income certificate"
+      },
+      {
+        "name": "Mark Sheets (Class 10, 12 or Graduation)",
+        "mandatory": true,
+        "notes": "Prior academic qualifying examination certificates"
+      },
+      {
+        "name": "Bank Passbook Copy",
+        "mandatory": true,
+        "notes": "Student joint bank account with parent/guarantor"
+      }
+    ],
+    "application_process": [
+      "Secure admission in a recognized professional or technical degree course.",
+      "Obtain institutional fee structure and prospectus from college/university.",
+      "Apply through State Channelizing Agency (SCA), partnered Bank branch, or online via MoSJE PM-SURAJ portal.",
+      "Verification of student credentials, marksheet, and sanction of up to 90% course fees (maximum ₹40 Lakh).",
+      "Direct electronic disbursement of semester fees to university escrow account.",
+      "Repayment commences after moratorium period: course duration + 1 year, or up to 6 months where repayment has started."
+    ],
+    "official_url": "https://nsfdc.nic.in/en/education-loan-scheme",
+    "last_verified": "2026-09-16",
+    "keywords": [
+      "education",
+      "degree",
+      "college",
+      "tuition",
+      "btech",
+      "medical",
+      "university",
+      "student",
+      "scholarship",
+      "higher studies",
+      "abroad",
+      "technical"
+    ],
+    "moratorium_months": 12,
+    "is_nsfdc_scheme": true,
+    "source_type": "official_faq",
+    "source_url": "https://nsfdc.nic.in/faqs",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "nsfdc",
+    "scheme_classification": "MoSJE / NSFDC Scheme"
   },
   {
     "id": "nbcfdc-new-swarnima",
@@ -647,7 +830,8 @@
       "nbcfdc_share_percent": 95.0,
       "interest_rate_percent": 5.0,
       "max_tenure_years": 8,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -697,7 +881,16 @@
       "garments",
       "food processing",
       "rekha"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nbcfdc-general-term-loan",
@@ -755,7 +948,8 @@
       "nbcfdc_share_percent": 85.0,
       "interest_rate_percent": 6.0,
       "max_tenure_years": 8,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -801,7 +995,16 @@
       "manufacturing",
       "trade",
       "machinery"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nbcfdc-shilp-sampada",
@@ -856,7 +1059,8 @@
       "nbcfdc_share_percent": 90.0,
       "interest_rate_percent": 5.0,
       "max_tenure_years": 8,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -903,7 +1107,16 @@
       "shilp sampada",
       "pottery",
       "woodwork"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nbcfdc-saksham",
@@ -960,7 +1173,8 @@
       "nbcfdc_share_percent": 90.0,
       "interest_rate_percent": 5.5,
       "max_tenure_years": 8,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1000,7 +1214,16 @@
       "it",
       "clinic",
       "engineering"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nbcfdc-krishi-sampada",
@@ -1055,7 +1278,8 @@
       "nbcfdc_share_percent": 95.0,
       "interest_rate_percent": 4.0,
       "max_tenure_years": 4,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1094,7 +1318,16 @@
       "farming",
       "agro",
       "organic"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nhfdc-divyangjan-swavalamban",
@@ -1166,7 +1399,8 @@
       "interest_rate_percent": 5.0,
       "max_tenure_years": 10,
       "moratorium_months": 12,
-      "interest_rebate_women": 1.0
+      "interest_rebate_women": 1.0,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1215,7 +1449,16 @@
       "special needs",
       "screen reader",
       "anita"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 12,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://ndfdc.nic.in/schemes",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nhfdc-micro-credit",
@@ -1283,7 +1526,8 @@
       "nhfdc_share_percent": 100.0,
       "interest_rate_percent": 5.0,
       "max_tenure_years": 3,
-      "moratorium_months": 2
+      "moratorium_months": 2,
+      "loan_category": "Micro Finance"
     },
     "documents": [
       {
@@ -1319,7 +1563,16 @@
       "kiosk",
       "handicrafts",
       "anita"
-    ]
+    ],
+    "loan_category": "Micro Finance",
+    "moratorium_months": 2,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://ndfdc.nic.in/schemes",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nhfdc-young-professionals",
@@ -1382,7 +1635,8 @@
       "nhfdc_share_percent": 90.0,
       "interest_rate_percent": 5.0,
       "max_tenure_years": 8,
-      "moratorium_months": 12
+      "moratorium_months": 12,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1421,7 +1675,16 @@
       "it",
       "consultancy",
       "anita"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 12,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://ndfdc.nic.in/schemes",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nhfdc-assistive-device",
@@ -1483,7 +1746,8 @@
       "nhfdc_share_percent": 90.0,
       "interest_rate_percent": 5.0,
       "max_tenure_years": 7,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1522,7 +1786,16 @@
       "wheelchair",
       "transport",
       "anita"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://ndfdc.nic.in/schemes",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nmdfc-term-loan-line1",
@@ -1580,7 +1853,8 @@
       "nmdfc_share_percent": 90.0,
       "interest_rate_percent": 6.0,
       "max_tenure_years": 5,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1629,7 +1903,16 @@
       "trading",
       "workshop",
       "imran"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nmdfc.org/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nmdfc-term-loan-line2",
@@ -1687,7 +1970,8 @@
       "nmdfc_share_percent": 85.0,
       "interest_rate_percent": 8.0,
       "max_tenure_years": 5,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1726,7 +2010,16 @@
       "workshop",
       "nmdfc",
       "imran"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nmdfc.org/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nmdfc-virasat",
@@ -1782,7 +2075,8 @@
       "nmdfc_share_percent": 90.0,
       "interest_rate_percent": 5.0,
       "max_tenure_years": 5,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1829,7 +2123,16 @@
       "handicraft",
       "weaver",
       "imran"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nmdfc.org/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nmdfc-mahila-samridhi",
@@ -1879,7 +2182,8 @@
       "nmdfc_share_percent": 100.0,
       "interest_rate_percent": 4.0,
       "max_tenure_years": 3,
-      "moratorium_months": 3
+      "moratorium_months": 3,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -1919,7 +2223,16 @@
       "tailoring",
       "stitching",
       "micro loan"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nmdfc.org/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "nmdfc-micro-finance",
@@ -1975,7 +2288,8 @@
       "nmdfc_share_percent": 100.0,
       "interest_rate_percent": 5.0,
       "max_tenure_years": 3,
-      "moratorium_months": 3
+      "moratorium_months": 3,
+      "loan_category": "Micro Finance"
     },
     "documents": [
       {
@@ -2008,7 +2322,16 @@
       "shg",
       "petty shop",
       "imran"
-    ]
+    ],
+    "loan_category": "Micro Finance",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://nmdfc.org/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "pmegp-scheme",
@@ -2078,7 +2401,8 @@
       "interest_rate_percent": 8.5,
       "max_tenure_years": 7,
       "moratorium_months": 6,
-      "notes_subsidy": "Special category (SC/ST/OBC/Minority/Women/PwD) gets 35% subsidy in rural areas and 25% in urban areas. Own contribution is only 5%."
+      "notes_subsidy": "Special category (SC/ST/OBC/Minority/Women/PwD) gets 35% subsidy in rural areas and 25% in urban areas. Own contribution is only 5%.",
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -2138,7 +2462,16 @@
       "workshop",
       "rekha",
       "suresh"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.kviconline.gov.in/pmegpeportal/pmegphome/index.jsp",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "stand-up-india",
@@ -2198,7 +2531,8 @@
       "interest_rate_percent": 8.0,
       "max_tenure_years": 7,
       "moratorium_months": 18,
-      "notes": "Margin money can be converged with eligible central/state subsidies so that actual borrower stake is at least 10%."
+      "notes": "Margin money can be converged with eligible central/state subsidies so that actual borrower stake is at least 10%.",
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -2247,7 +2581,16 @@
       "suresh",
       "sidbi",
       "composite loan"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 18,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.standupmitra.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "mudra-shishu",
@@ -2316,7 +2659,8 @@
       "bank_loan_percent": 100.0,
       "interest_rate_percent": 8.0,
       "max_tenure_years": 5,
-      "moratorium_months": 3
+      "moratorium_months": 3,
+      "loan_category": "Micro Finance"
     },
     "documents": [
       {
@@ -2359,7 +2703,16 @@
       "small shop",
       "tailoring",
       "rekha"
-    ]
+    ],
+    "loan_category": "Micro Finance",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.mudra.org.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "mudra-kishore",
@@ -2430,7 +2783,8 @@
       "bank_loan_percent": 90.0,
       "interest_rate_percent": 8.5,
       "max_tenure_years": 5,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -2472,7 +2826,16 @@
       "working capital",
       "rekha",
       "suresh"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.mudra.org.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "mudra-tarun",
@@ -2540,7 +2903,8 @@
       "bank_loan_percent": 85.0,
       "interest_rate_percent": 9.0,
       "max_tenure_years": 5,
-      "moratorium_months": 6
+      "moratorium_months": 6,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -2585,7 +2949,16 @@
       "manufacturing",
       "suresh",
       "workshop"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 6,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.mudra.org.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "pm-vishwakarma",
@@ -2656,7 +3029,8 @@
       "interest_rate_percent": 5.0,
       "max_tenure_years": 5,
       "moratorium_months": 3,
-      "notes": "First tranche of ₹1,00,000 for 18 months tenure; second tranche of ₹2,00,000 for 30 months tenure upon timely repayment. Free ₹15,000 e-voucher for modern toolkits."
+      "notes": "First tranche of ₹1,00,000 for 18 months tenure; second tranche of ₹2,00,000 for 30 months tenure upon timely repayment. Free ₹15,000 e-voucher for modern toolkits.",
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -2705,7 +3079,16 @@
       "15000",
       "imran",
       "rekha"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://pmvishwakarma.gov.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "pm-svanidhi",
@@ -2772,7 +3155,8 @@
       "interest_rate_percent": 7.0,
       "max_tenure_years": 3,
       "moratorium_months": 1,
-      "notes": "7% interest subsidy credited directly to bank account on regular repayment; up to ₹1,200/year cashback on digital UPI transactions."
+      "notes": "7% interest subsidy credited directly to bank account on regular repayment; up to ₹1,200/year cashback on digital UPI transactions.",
+      "loan_category": "Micro Finance"
     },
     "documents": [
       {
@@ -2809,7 +3193,16 @@
       "thela",
       "working capital",
       "10000"
-    ]
+    ],
+    "loan_category": "Micro Finance",
+    "moratorium_months": 1,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://pmsvanidhi.mohua.gov.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "vcf-sc",
@@ -2867,7 +3260,8 @@
       "interest_rate_percent": 4.0,
       "max_tenure_years": 8,
       "moratorium_months": 24,
-      "notes": "Provided as Compulsorily Convertible Debentures (CCDs) / Equity / Soft Loan at 4% p.a. (3.75% for women promoters)."
+      "notes": "Provided as Compulsorily Convertible Debentures (CCDs) / Equity / Soft Loan at 4% p.a. (3.75% for women promoters).",
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -2908,7 +3302,16 @@
       "startup",
       "ifci",
       "mosje"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 24,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.vcfsc.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "mahila-coir-yojana",
@@ -2966,7 +3369,8 @@
       "margin_money_percent": 25.0,
       "interest_rate_percent": 0.0,
       "max_tenure_years": 3,
-      "moratorium_months": 3
+      "moratorium_months": 3,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -3002,7 +3406,16 @@
       "rural",
       "coconut",
       "spinning"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 3,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://coirboard.gov.in/?page_id=275",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "cgtmse-guarantee",
@@ -3073,7 +3486,8 @@
       "interest_rate_percent": 8.5,
       "max_tenure_years": 8,
       "moratorium_months": 12,
-      "notes": "Up to 85% credit guarantee coverage for loans to Women, SC, ST, and PwD promoters."
+      "notes": "Up to 85% credit guarantee coverage for loans to Women, SC, ST, and PwD promoters.",
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -3114,7 +3528,16 @@
       "workshop",
       "manufacturing",
       "suresh"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 12,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.cgtmse.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "dr-ambedkar-special-assistance",
@@ -3172,7 +3595,8 @@
       "margin_money_percent": 10.0,
       "interest_rate_percent": 6.5,
       "max_tenure_years": 7,
-      "moratorium_months": 12
+      "moratorium_months": 12,
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -3213,7 +3637,16 @@
       "dalit",
       "suresh",
       "workshop"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 12,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.scsthub.in",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "sidbi-mahila-udyam-nidhi",
@@ -3272,7 +3705,8 @@
       "interest_rate_percent": 1.0,
       "max_tenure_years": 10,
       "moratorium_months": 60,
-      "notes": "Soft seed loan up to 25% of project cost (max ₹2.5 Lakhs) with nominal 1% service charge and generous 5-year repayment moratorium."
+      "notes": "Soft seed loan up to 25% of project cost (max ₹2.5 Lakhs) with nominal 1% service charge and generous 5-year repayment moratorium.",
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -3312,7 +3746,16 @@
       "equity",
       "tailoring",
       "rekha"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 60,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://www.sidbi.in/en/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   },
   {
     "id": "ts-dalit-bandhu",
@@ -3372,7 +3815,8 @@
       "interest_rate_percent": 0.0,
       "max_tenure_years": 0,
       "moratorium_months": 0,
-      "notes": "100% non-repayable grant up to ₹10 Lakhs deposited directly into beneficiary account for enterprise asset creation."
+      "notes": "100% non-repayable grant up to ₹10 Lakhs deposited directly into beneficiary account for enterprise asset creation.",
+      "loan_category": "Term Loan"
     },
     "documents": [
       {
@@ -3419,6 +3863,15 @@
       "capital grant",
       "transport",
       "suresh"
-    ]
+    ],
+    "loan_category": "Term Loan",
+    "moratorium_months": 0,
+    "is_nsfdc_scheme": false,
+    "source_type": "official_guidelines",
+    "source_url": "https://dalitbandhu.telangana.gov.in/",
+    "source_date": "2024-2025",
+    "is_current": true,
+    "scheme_type": "related_external",
+    "scheme_classification": "Related external government scheme"
   }
 ]
