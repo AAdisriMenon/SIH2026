@@ -4,6 +4,7 @@ Provides APIs for Deterministic Scheme Matching, Semantic Ranking,
 Financial Calculations, Grounded RAG Assistant, and Admin Management.
 """
 import os
+import json
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -156,6 +157,27 @@ def get_scheme_detail(scheme_id: str):
     if not scheme:
         raise HTTPException(status_code=404, detail="Scheme not found")
     return scheme
+
+GENERAL_BENEFITS_PATH = os.path.join(os.path.dirname(__file__), "data", "general_benefits.json")
+
+@app.get("/api/general-benefits")
+def get_general_benefits(category: Optional[str] = None, q: Optional[str] = None):
+    """
+    Returns verified pan-India and state government benefits across agriculture,
+    health, housing, women/child welfare, pensions, and energy (Tier 2 discovery layer).
+    """
+    if not os.path.exists(GENERAL_BENEFITS_PATH):
+        return []
+    with open(GENERAL_BENEFITS_PATH, "r", encoding="utf-8") as f:
+        benefits = json.load(f)
+    if category and category.lower() != "all":
+        c_lower = category.lower()
+        benefits = [b for b in benefits if c_lower in b.get("category", "").lower() or c_lower in b.get("sector", "").lower()]
+    if q:
+        q_lower = q.lower()
+        benefits = [b for b in benefits if q_lower in b.get("name", "").lower() or q_lower in b.get("summary", "").lower() or q_lower in b.get("state", "").lower()]
+    return benefits
+
 
 # ----------------------------------------------------
 # 3. Interactive Financial Calculator API

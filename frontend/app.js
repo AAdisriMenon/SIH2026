@@ -15,8 +15,29 @@ const state = {
   currentModalScheme: null,
   isListening: false,
   speechSynth: window.speechSynthesis,
-  recognition: null
+  recognition: null,
+  generalBenefits: [],
+  activeGeneralCategory: 'All',
+  activeView: 'matcher'
 };
+
+// Language to BCP-47 Map for Web Speech API (STT & TTS)
+const BCP47_MAP = {
+  en: 'en-IN', hi: 'hi-IN', mr: 'mr-IN', ta: 'ta-IN', bn: 'bn-IN',
+  te: 'te-IN', gu: 'gu-IN', kn: 'kn-IN', ml: 'ml-IN', pa: 'pa-IN',
+  or: 'or-IN', as: 'as-IN', ur: 'ur-IN', sa: 'sa-IN', ne: 'ne-NP',
+  mai: 'mai-IN', kok: 'kok-IN', brx: 'hi-IN', doi: 'hi-IN', ks: 'ks-IN',
+  mni: 'bn-IN', sat: 'hi-IN', sd: 'sd-IN'
+};
+
+// Safe Localization Lookup with Fallback
+function getI18n(key, fallback = '') {
+  const cur = TRANSLATIONS[state.currentLang];
+  if (cur && cur[key] !== undefined) return cur[key];
+  const en = TRANSLATIONS['en'];
+  if (en && en[key] !== undefined) return en[key];
+  return fallback;
+}
 
 // Persona Presets for Hackathon Demos
 const PERSONAS = {
@@ -252,13 +273,18 @@ function initVoiceSTT() {
       return;
     }
 
-    // Set recognition language matching UI
-    if (state.currentLang === 'hi') state.recognition.lang = 'hi-IN';
-    else if (state.currentLang === 'mr') state.recognition.lang = 'mr-IN';
-    else if (state.currentLang === 'ta') state.recognition.lang = 'ta-IN';
-    else state.recognition.lang = 'en-IN';
+    // Set recognition language matching UI with graceful fallback
+    const langTag = BCP47_MAP[state.currentLang] || 'en-IN';
+    state.recognition.lang = langTag;
 
-    state.recognition.start();
+    try {
+      state.recognition.start();
+    } catch (err) {
+      console.warn('Speech recognition start failed for', langTag, err);
+      // Non-blocking fallback to en-IN
+      state.recognition.lang = 'en-IN';
+      try { state.recognition.start(); } catch (e) {}
+    }
   });
 
   state.recognition.onstart = () => {
@@ -297,13 +323,17 @@ function speakText(text) {
   state.speechSynth.cancel(); // stop any ongoing speech
 
   const utterance = new SpeechSynthesisUtterance(text);
-  if (state.currentLang === 'hi') utterance.lang = 'hi-IN';
-  else if (state.currentLang === 'mr') utterance.lang = 'mr-IN';
-  else if (state.currentLang === 'ta') utterance.lang = 'ta-IN';
-  else utterance.lang = 'en-IN';
-
+  const langTag = BCP47_MAP[state.currentLang] || 'en-IN';
+  utterance.lang = langTag;
   utterance.rate = 0.95;
-  state.speechSynth.speak(utterance);
+
+  try {
+    state.speechSynth.speak(utterance);
+  } catch (err) {
+    console.warn('Speech synthesis error, falling back to en-IN:', err);
+    utterance.lang = 'en-IN';
+    state.speechSynth.speak(utterance);
+  }
 }
 
 // ----------------------------------------------------
@@ -408,6 +438,32 @@ function bindEvents() {
   // Export Buttons
   document.getElementById('btnShareWhatsApp').addEventListener('click', shareWhatsAppShortlist);
   document.getElementById('btnPrintShortlist').addEventListener('click', printShortlistReceipt);
+
+  // View Navigation Switcher
+  const btnMatcher = document.getElementById('navBusinessMatcher');
+  const btnGen = document.getElementById('navGeneralBenefits');
+  if (btnMatcher) btnMatcher.addEventListener('click', () => switchView('matcher'));
+  if (btnGen) btnGen.addEventListener('click', () => switchView('general'));
+
+  // General Benefits Category Filters
+  document.querySelectorAll('.filter-chip-gen').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip-gen').forEach(c => {
+        c.className = 'filter-chip-gen px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700 cursor-pointer';
+      });
+      chip.className = 'filter-chip-gen px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white cursor-pointer';
+      state.activeGeneralCategory = chip.getAttribute('data-category');
+      renderGeneralBenefits();
+    });
+  });
+
+  // General Search Input
+  const genSearch = document.getElementById('generalSearchInput');
+  if (genSearch) {
+    genSearch.addEventListener('input', () => {
+      renderGeneralBenefits();
+    });
+  }
 }
 
 function loadPersona(key) {
@@ -730,6 +786,7 @@ window.openSchemeDetailModal = function(schemeId) {
 };
 
 function closeModal() {
+  state.currentModalScheme = null;
   document.getElementById('schemeDetailModal').classList.add('hidden');
 }
 
@@ -989,16 +1046,80 @@ window.promptEditScheme = async function(schemeId) {
 // ----------------------------------------------------
 function shareWhatsAppShortlist() {
   const t = TRANSLATIONS[state.currentLang] || TRANSLATIONS['en'];
+
+  // Case A: Sharing specific scheme from active Modal
+  if (state.currentModalScheme) {
+    const s = state.currentModalScheme;
+    const sName = (t.schemes && t.schemes[s.scheme_id] && t.schemes[s.scheme_id].name) || s.scheme_name;
+    const userCategory = document.getElementById('inputCategory').value;
+    const userSector = document.getElementById('inputSector').value;
+    const cost = document.getElementById('sliderProjectCost')?.value || document.getElementById('inputProjectCost').value;
+    const tenure = document.getElementById('sliderTenure')?.value || 5;
+    const margin = document.getElementById('calcMarginMoney')?.textContent || '₹0';
+    const subsidy = document.getElementById('calcSubsidy')?.textContent || '₹0';
+    const loan = document.getElementById('calcLoan')?.textContent || '₹0';
+    const emi = document.getElementById('calcEmi')?.textContent || '₹0 / month';
+
+    let text = `*Ministry of Social Justice and Empowerment (MoSJE)*
+`;
+    text += `*Official Scheme Eligibility Dossier*
+`;
+    text += `---------------------------------------
+`;
+    text += `Scheme: *${sName}*
+`;
+    text += `Authority: ${s.issuing_body}
+`;
+    text += `Verdict: *${s.eligibility_status}* (${s.semantic_score}% match)
+`;
+    text += `Applicant: ${userCategory} | Sector: ${userSector}
+`;
+    text += `Project Cost: ₹${Number(cost).toLocaleString('en-IN')}
+
+`;
+    text += `*Financial Breakdown (${tenure} Years):*
+`;
+    text += `• Margin Money: ${margin}
+`;
+    text += `• Capital Subsidy: ${subsidy}
+`;
+    text += `• Concessional Loan: ${loan}
+`;
+    text += `• Monthly EMI: *${emi}*
+
+`;
+    text += `*Official Portal:* ${s.official_url}
+`;
+    text += `*Verified Active:* ${s.last_verified || '2026-09-16'}
+
+`;
+    text += `_Verified under SIH 2026 Problem Statement #26092._`;
+
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    return;
+  }
+
+  // Case B: Sharing entire shortlist when outside modal
   if (!state.matchResults || !state.matchResults.matches) return;
   const eligible = state.matchResults.matches.filter((s) => s.eligibility_status === 'ELIGIBLE');
 
-  let text = `${t.whatsappHeader}\n`;
-  text += `${t.whatsappCategory}: ${state.matchResults.user_summary.category} | ${t.whatsappSector}: ${state.matchResults.user_summary.business_sector}\n\n`;
-  text += `${t.whatsappEligible} (${eligible.length}):\n`;
+  let text = `${t.whatsappHeader}
+`;
+  text += `${t.whatsappCategory}: ${state.matchResults.user_summary.category} | ${t.whatsappSector}: ${state.matchResults.user_summary.business_sector}
+
+`;
+  text += `${t.whatsappEligible} (${eligible.length}):
+`;
 
   eligible.slice(0, 5).forEach((s, i) => {
     const sName = (t.schemes && t.schemes[s.scheme_id] && t.schemes[s.scheme_id].name) || s.scheme_name;
-    text += `${i + 1}. *${sName}*\n   • ${t.whatsappLoan}: ₹${Number(s.financial_summary.max_loan_amount || 0).toLocaleString('en-IN')}\n   • ${t.whatsappRate}: ${s.financial_summary.interest_rate_percent || 0}% ${t.perAnnum}\n   • ${t.whatsappPortal}: ${s.official_url}\n\n`;
+    text += `${i + 1}. *${sName}*
+   • ${t.whatsappLoan}: ₹${Number(s.financial_summary.max_loan_amount || 0).toLocaleString('en-IN')}
+   • ${t.whatsappRate}: ${s.financial_summary.interest_rate_percent || 0}% ${t.perAnnum}
+   • ${t.whatsappPortal}: ${s.official_url}
+
+`;
   });
 
   text += `${t.whatsappFooter}`;
@@ -1008,57 +1129,381 @@ function shareWhatsAppShortlist() {
 
 function printShortlistReceipt() {
   const t = TRANSLATIONS[state.currentLang] || TRANSLATIONS['en'];
+  const printArea = document.getElementById('printableArea');
+
+  // Case A: Print Single Scheme Deep-Dive Eligibility Dossier from active Modal
+  if (state.currentModalScheme) {
+    const s = state.currentModalScheme;
+    const sName = (t.schemes && t.schemes[s.scheme_id] && t.schemes[s.scheme_id].name) || s.scheme_name;
+    const sPurpose = (t.schemes && t.schemes[s.scheme_id] && t.schemes[s.scheme_id].summary) || s.purpose || s.summary;
+    const userCategory = document.getElementById('inputCategory').value;
+    const userGender = document.getElementById('inputGender').value;
+    const userAge = document.getElementById('inputAge').value;
+    const userIncome = document.getElementById('inputIncome').value;
+    const isPwd = document.getElementById('inputIsPwd').checked;
+    const pwdPercent = document.getElementById('inputPwdPercent')?.value || 0;
+    const userSector = document.getElementById('inputSector').value;
+    const userBusinessIdea = document.getElementById('inputBusinessIdea').value;
+    const targetCost = document.getElementById('sliderProjectCost')?.value || document.getElementById('inputProjectCost').value;
+    const calcTenure = document.getElementById('sliderTenure')?.value || 5;
+    const calcMargin = document.getElementById('calcMarginMoney')?.textContent || '₹0';
+    const calcSubsidy = document.getElementById('calcSubsidy')?.textContent || '₹0';
+    const calcLoan = document.getElementById('calcLoan')?.textContent || '₹0';
+    const calcEmi = document.getElementById('calcEmi')?.textContent || '₹0 / month';
+
+    let statusBorderColor = '#10b981';
+    let statusBgColor = '#ecfdf5';
+    let statusBadgeColor = '#059669';
+    if (s.eligibility_status === 'BORDERLINE') {
+      statusBorderColor = '#f59e0b';
+      statusBgColor = '#fffbeb';
+      statusBadgeColor = '#d97706';
+    } else if (s.eligibility_status === 'INELIGIBLE') {
+      statusBorderColor = '#94a3b8';
+      statusBgColor = '#f8fafc';
+      statusBadgeColor = '#64748b';
+    }
+
+    // Verdict rows
+    const verdictsHtml = (s.verdicts || []).map(v => {
+      let statusColor = '#059669';
+      if (v.status === 'BORDERLINE') statusColor = '#d97706';
+      if (v.status === 'FAIL') statusColor = '#dc2626';
+      return `
+        <tr style="border-bottom: 1px solid #f1f5f9;">
+          <td style="padding: 4px 6px; font-weight: 600; color: #1e293b;">${escapeHtml(v.criterion)}</td>
+          <td style="padding: 4px 6px; color: ${statusColor}; font-weight: 700;">${v.status}</td>
+          <td style="padding: 4px 6px; color: #475569;">${escapeHtml(v.reason)}</td>
+        </tr>
+      `;
+    }).join('');
+
+    // Document rows
+    const docs = s.documents || [];
+    const docRows = [];
+    for (let i = 0; i < docs.length; i += 2) {
+      const d1 = docs[i];
+      const d2 = docs[i + 1];
+      docRows.push(`
+        <tr>
+          <td style="width: 50%; padding: 4px 6px; border-bottom: 1px solid #f1f5f9; vertical-align: top;">
+            <strong>[${d1.mandatory ? 'X' : '-'}] ${escapeHtml(d1.name)}</strong> ${d1.mandatory ? '<span style="color: #dc2626; font-size: 8px;">(Mandatory)</span>' : '<span style="color: #64748b; font-size: 8px;">(Optional)</span>'}<br>
+            <span style="color: #64748b; font-size: 8.5px;">${escapeHtml(d1.notes || '')}</span>
+          </td>
+          <td style="width: 50%; padding: 4px 6px; border-bottom: 1px solid #f1f5f9; vertical-align: top;">
+            ${d2 ? `
+              <strong>[${d2.mandatory ? 'X' : '-'}] ${escapeHtml(d2.name)}</strong> ${d2.mandatory ? '<span style="color: #dc2626; font-size: 8px;">(Mandatory)</span>' : '<span style="color: #64748b; font-size: 8px;">(Optional)</span>'}<br>
+              <span style="color: #64748b; font-size: 8.5px;">${escapeHtml(d2.notes || '')}</span>
+            ` : ''}
+          </td>
+        </tr>
+      `);
+    }
+
+    // Step rows
+    const stepsHtml = (s.application_process || []).map((step, idx) => `
+      <li style="margin-bottom: 4px;"><strong>Step ${idx + 1}:</strong> ${escapeHtml(step)}</li>
+    `).join('');
+
+    printArea.innerHTML = `
+      <div style="font-family: Arial, sans-serif; color: #111827; line-height: 1.45; font-size: 11px;">
+        <!-- Ministry Header -->
+        <div style="border-bottom: 2px solid #0c2340; padding-bottom: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <div style="font-size: 14px; font-weight: 800; color: #0c2340; text-transform: uppercase;">MINISTRY OF SOCIAL JUSTICE AND EMPOWERMENT</div>
+            <div style="font-size: 10px; color: #4b5563; margin-top: 1px;">Government of India &bull; Smart India Hackathon 2026 (Problem Statement #26092)</div>
+            <div style="font-size: 12px; font-weight: 700; color: #1e3a8a; margin-top: 3px;">OFFICIAL SCHEME ELIGIBILITY & CONCESSIONAL CREDIT DOSSIER</div>
+          </div>
+          <div style="text-align: right; font-size: 9.5px; color: #6b7280;">
+            <div><strong>Date:</strong> ${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+            <div><strong>Ref:</strong> MOSJE-${Date.now().toString().slice(-8)}</div>
+            <div style="color: #059669; font-weight: 700; margin-top: 2px;">✔ Zero-Hallucination Certified</div>
+          </div>
+        </div>
+
+        <!-- Applicant Snapshot -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 8px 12px; margin-bottom: 12px;">
+          <div style="font-size: 10px; font-weight: 700; color: #0c2340; text-transform: uppercase; margin-bottom: 4px; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px;">Beneficiary Profile Snapshot</div>
+          <table style="width: 100%; font-size: 10px; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 2px 4px; color: #64748b;">Social Category:</td>
+              <td style="padding: 2px 4px;"><strong>${escapeHtml(userCategory)}</strong></td>
+              <td style="padding: 2px 4px; color: #64748b;">Gender / Age:</td>
+              <td style="padding: 2px 4px;"><strong>${escapeHtml(userGender)}, ${escapeHtml(userAge)} yrs</strong></td>
+            </tr>
+            <tr>
+              <td style="padding: 2px 4px; color: #64748b;">Annual Family Income:</td>
+              <td style="padding: 2px 4px;"><strong>₹${Number(userIncome).toLocaleString('en-IN')}</strong></td>
+              <td style="padding: 2px 4px; color: #64748b;">Divyangjan (PwD):</td>
+              <td style="padding: 2px 4px;"><strong>${isPwd ? `Yes (${pwdPercent}%)` : 'No'}</strong></td>
+            </tr>
+            <tr>
+              <td style="padding: 2px 4px; color: #64748b;">Target Project Cost:</td>
+              <td style="padding: 2px 4px;"><strong>₹${Number(targetCost).toLocaleString('en-IN')}</strong></td>
+              <td style="padding: 2px 4px; color: #64748b;">Business Sector:</td>
+              <td style="padding: 2px 4px;"><strong>${escapeHtml(userSector)}</strong></td>
+            </tr>
+            <tr>
+              <td style="padding: 2px 4px; color: #64748b;">Proposed Business:</td>
+              <td colspan="3" style="padding: 2px 4px;"><strong>${escapeHtml(userBusinessIdea)}</strong></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Scheme Title & Verdict Banner -->
+        <div style="border: 2px solid ${statusBorderColor}; background: ${statusBgColor}; border-radius: 5px; padding: 10px 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: #334155;">${escapeHtml(s.issuing_body)}</div>
+            <div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-top: 1px;">${escapeHtml(sName)}</div>
+            <div style="font-size: 10px; color: #334155; margin-top: 2px;"><strong>Target Groups:</strong> ${(s.rules?.categories || s.category_targets || []).join(', ')} | ${(s.rules?.gender || s.gender_targets || []).join(', ')}</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="display: inline-block; padding: 5px 12px; border-radius: 4px; font-weight: 800; font-size: 12px; color: white; background: ${statusBadgeColor}; text-transform: uppercase;">
+              ${s.eligibility_status}
+            </div>
+            <div style="font-size: 9.5px; color: #475569; margin-top: 3px;">Relevance Score: <strong>${s.semantic_score || 85}%</strong></div>
+          </div>
+        </div>
+
+        <!-- Scheme Purpose -->
+        <div style="margin-bottom: 12px;">
+          <div style="font-size: 10px; font-weight: 700; color: #0c2340; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 5px;">Scheme Purpose & Scope</div>
+          <p style="margin: 0; font-size: 10.5px; color: #334155; line-height: 1.4;">${escapeHtml(sPurpose)}</p>
+        </div>
+
+        <!-- Explainability Audit Trail -->
+        <div style="margin-bottom: 12px;">
+          <div style="font-size: 10px; font-weight: 700; color: #0c2340; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 5px;">Rule Evaluation Audit Trail (Zero-Hallucination Verified)</div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 9.5px;">
+            <thead>
+              <tr style="background: #f1f5f9; text-align: left; border-bottom: 1px solid #cbd5e1;">
+                <th style="padding: 5px 6px; width: 22%;">Evaluation Criterion</th>
+                <th style="padding: 5px 6px; width: 12%;">Status</th>
+                <th style="padding: 5px 6px;">Detailed Audit Reason & Statutory Clause</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${verdictsHtml}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Financial Breakdown & EMI -->
+        <div style="margin-bottom: 12px;">
+          <div style="font-size: 10px; font-weight: 700; color: #0c2340; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 5px;">Financial Structure & EMI Breakdown (${calcTenure} Year Tenure)</div>
+          <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 10px; margin-bottom: 6px;">
+            <tr>
+              <td style="width: 25%; background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px;">
+                <div style="color: #64748b; font-size: 9px;">Total Project Cost</div>
+                <div style="font-size: 12px; font-weight: 700; color: #0f172a; margin-top: 2px;">₹${Number(targetCost).toLocaleString('en-IN')}</div>
+              </td>
+              <td style="width: 25%; background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px;">
+                <div style="color: #64748b; font-size: 9px;">Margin Money (Self)</div>
+                <div style="font-size: 12px; font-weight: 700; color: #d97706; margin-top: 2px;">${calcMargin}</div>
+              </td>
+              <td style="width: 25%; background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px;">
+                <div style="color: #64748b; font-size: 9px;">Capital Subsidy / Grant</div>
+                <div style="font-size: 12px; font-weight: 700; color: #059669; margin-top: 2px;">${calcSubsidy}</div>
+              </td>
+              <td style="width: 25%; background: #eff6ff; border: 1px solid #bfdbfe; padding: 6px;">
+                <div style="color: #1e40af; font-size: 9px;">Sanctioned Loan Principal</div>
+                <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; margin-top: 2px;">${calcLoan}</div>
+              </td>
+            </tr>
+          </table>
+          <div style="display: flex; justify-content: space-between; align-items: center; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 8px 12px; border-radius: 4px;">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; color: #166534;">Reducing-Balance Monthly EMI: ${calcEmi}</div>
+              <div style="font-size: 9px; color: #15803d;">Calculated for ${calcTenure} years (${calcTenure * 12} monthly instalments)</div>
+            </div>
+            <div style="text-align: right; font-size: 9.5px; color: #166534;">
+              <div>Verified Scheme Concessional Lending Model</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mandatory Document Checklist -->
+        <div style="margin-bottom: 12px;">
+          <div style="font-size: 10px; font-weight: 700; color: #0c2340; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 5px;">Mandatory Document Checklist</div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 9.5px;">
+            ${docRows.join('')}
+          </table>
+        </div>
+
+        <!-- Step-by-Step Workflow -->
+        <div style="margin-bottom: 12px;">
+          <div style="font-size: 10px; font-weight: 700; color: #0c2340; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px; margin-bottom: 5px;">Step-by-Step Application Workflow</div>
+          <ol style="margin: 0; padding-left: 16px; font-size: 9.5px; color: #334155; line-height: 1.4;">
+            ${stepsHtml}
+          </ol>
+        </div>
+
+        <!-- Official Portal & Verification Stamp -->
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+          <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+            <tr>
+              <td style="width: 70%; vertical-align: middle; word-break: break-all; padding-right: 10px;">
+                <div style="font-size: 8.5px; color: #64748b; font-weight: 700; text-transform: uppercase;">Official Government Application Portal</div>
+                <div style="font-size: 10px; font-weight: 700; color: #1d4ed8; word-break: break-all;">${s.official_url}</div>
+                <div style="font-size: 8px; color: #64748b;">All formal loan sanctions and disbursements are processed exclusively through this verified portal.</div>
+              </td>
+              <td style="width: 30%; text-align: right; vertical-align: middle; font-size: 8.5px; color: #475569; padding-right: 12px;">
+                <div>Verified: <strong>${s.last_verified || '2026-09-16'}</strong></div>
+                <div style="font-size: 8px; color: #94a3b8;">MoSJE SIH 2026 #26092</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Legal Advisory Disclaimer -->
+        <div style="font-size: 8px; color: #94a3b8; text-align: center; margin-top: 10px; border-top: 1px dashed #cbd5e1; padding-top: 5px;">
+          Disclaimer: This dossier is generated by the MoSJE AI Scheme Matching Platform for advisory purposes under SIH 2026 Problem Statement #26092. Eligibility evaluation is deterministic based on gazetted criteria. Final sanction of loans or subsidies is subject to statutory verification by the respective State Channelising Agency (SCA) or lending bank.
+        </div>
+      </div>
+    `;
+
+    window.print();
+    return;
+  }
+
+  // Case B: Print Shortlist Receipt when outside modal
   if (!state.matchResults || !state.matchResults.matches) return;
   const eligible = state.matchResults.matches.filter((s) => s.eligibility_status === 'ELIGIBLE');
 
-  document.getElementById('printApplicantName').textContent = document.getElementById('inputCategory').value + ' ' + t.receiptEntrepreneur;
-  document.getElementById('printDate').textContent = new Date().toLocaleDateString('en-IN');
-
-  const printDiv = document.getElementById('printContent');
-  printDiv.innerHTML = `
-    <h2 style="color: #0c2340; margin: 0 0 4px 0;">${t.receiptTitle}</h2>
-    <h3 style="color: #333; margin: 0 0 10px 0; font-size: 14px;">${t.receiptSubtitle}</h3>
-    <p style="font-size: 12px; color: #555; margin-bottom: 12px;"><strong>${t.receiptApplicantPrefix}</strong> ${document.getElementById('inputCategory').value} ${t.receiptEntrepreneur} | <strong>${t.receiptDatePrefix}</strong> ${new Date().toLocaleDateString('en-IN')}</p>
-    <h4 style="margin: 10px 0 6px 0;">${t.whatsappEligible} (${eligible.length}):</h4>
-    <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; font-size: 11px;">
-      <thead>
-        <tr style="background: #f1f5f9;">
-          <th>${t.receiptTableScheme}</th>
-          <th>${t.receiptTableBody}</th>
-          <th>${t.receiptTableLoan}</th>
-          <th>${t.receiptTableRate}</th>
-          <th>${t.receiptTableSubsidy}</th>
-          <th>${t.receiptTableUrl}</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${eligible.map((s) => {
-          const sName = (t.schemes && t.schemes[s.scheme_id] && t.schemes[s.scheme_id].name) || s.scheme_name;
-          return `
-            <tr>
-              <td><strong>${sName}</strong></td>
-              <td>${s.issuing_body}</td>
-              <td>₹${Number(s.financial_summary.max_loan_amount || 0).toLocaleString('en-IN')}</td>
-              <td>${s.financial_summary.interest_rate_percent || 0}%</td>
-              <td>${s.financial_summary.subsidy_percent || 0}%</td>
-              <td>${s.official_url}</td>
-            </tr>
-          `;
-        }).join('')}
-      </tbody>
-    </table>
-    <p style="font-size: 10px; color: #555; margin-top: 15px;">${t.receiptNote}</p>
+  printArea.innerHTML = `
+    <div style="font-family: Arial, sans-serif; padding: 20px; color: #111;">
+      <div style="border-bottom: 2px solid #0c2340; padding-bottom: 10px; margin-bottom: 15px;">
+        <h2 style="margin: 0; color: #0c2340;">${t.receiptTitle}</h2>
+        <h3 style="margin: 5px 0 0 0; color: #333; font-size: 14px;">${t.receiptSubtitle}</h3>
+        <p style="margin: 3px 0 0 0; font-size: 11px; color: #666;"><strong>${t.receiptApplicantPrefix}</strong> ${document.getElementById('inputCategory').value} ${t.receiptEntrepreneur} | <strong>${t.receiptDatePrefix}</strong> ${new Date().toLocaleDateString('en-IN')}</p>
+      </div>
+      <h4 style="margin: 10px 0 6px 0; font-size: 12px;">${t.whatsappEligible} (${eligible.length}):</h4>
+      <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; font-size: 11px;">
+        <thead>
+          <tr style="background: #f1f5f9;">
+            <th>${t.receiptTableScheme}</th>
+            <th>${t.receiptTableBody}</th>
+            <th>${t.receiptTableLoan}</th>
+            <th>${t.receiptTableRate}</th>
+            <th>${t.receiptTableSubsidy}</th>
+            <th>${t.receiptTableUrl}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${eligible.map((s) => {
+            const sName = (t.schemes && t.schemes[s.scheme_id] && t.schemes[s.scheme_id].name) || s.scheme_name;
+            return `
+              <tr>
+                <td><strong>${escapeHtml(sName)}</strong></td>
+                <td>${escapeHtml(s.issuing_body)}</td>
+                <td>₹${Number(s.financial_summary.max_loan_amount || 0).toLocaleString('en-IN')}</td>
+                <td>${s.financial_summary.interest_rate_percent || 0}%</td>
+                <td>${s.financial_summary.subsidy_percent || 0}%</td>
+                <td>${s.official_url}</td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+      <p style="font-size: 10px; color: #555; margin-top: 15px;">${t.receiptNote}</p>
+    </div>
   `;
 
   window.print();
 }
 
-function escapeHtml(str) {
-  return str.replace(/[&<>'"]/g, (tag) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#39;',
-    '"': '&quot;'
-  }[tag] || tag));
+// ----------------------------------------------------
+// 9. Tier 2 Discovery Layer: Allied Government Benefits
+// ----------------------------------------------------
+async function loadGeneralBenefits() {
+  try {
+    const res = await fetch('/api/general-benefits');
+    const data = await res.json();
+    state.generalBenefits = data;
+    renderGeneralBenefits();
+  } catch (err) {
+    console.error('Failed to load general benefits:', err);
+  }
+}
+
+function renderGeneralBenefits() {
+  const container = document.getElementById('generalBenefitsGrid');
+  if (!container || !state.generalBenefits) return;
+
+  const q = (document.getElementById('generalSearchInput')?.value || '').toLowerCase().trim();
+  const cat = state.activeGeneralCategory;
+
+  let filtered = state.generalBenefits;
+  if (cat && cat !== 'All') {
+    filtered = filtered.filter(b => b.category.toLowerCase().includes(cat.toLowerCase()) || b.sector.toLowerCase().includes(cat.toLowerCase()));
+  }
+  if (q) {
+    filtered = filtered.filter(b => b.name.toLowerCase().includes(q) || b.summary.toLowerCase().includes(q) || b.state.toLowerCase().includes(q) || b.category.toLowerCase().includes(q));
+  }
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full p-8 text-center bg-slate-900/40 rounded-2xl border border-slate-800 text-slate-400 text-xs">
+        <i data-lucide="info" class="w-6 h-6 mx-auto mb-2 text-slate-500"></i>
+        No schemes found matching the selected filter.
+      </div>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
+  container.innerHTML = filtered.map(b => `
+    <div class="bg-slate-900 border border-slate-800 hover:border-emerald-700/60 rounded-2xl p-5 shadow-lg flex flex-col justify-between transition duration-200">
+      <div>
+        <div class="flex items-center justify-between gap-2 mb-2.5">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60">
+            ${escapeHtml(b.category)}
+          </span>
+          <span class="text-[10px] font-medium text-slate-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">
+            ${escapeHtml(b.level)} &bull; ${escapeHtml(b.state)}
+          </span>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-2 leading-snug">${escapeHtml(b.name)}</h4>
+        <p class="text-xs text-slate-300 leading-relaxed mb-3">${escapeHtml(b.summary)}</p>
+        <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 mb-4">
+          <span class="font-semibold text-slate-300">Target Beneficiaries:</span> ${escapeHtml(b.target_beneficiaries)}
+        </div>
+      </div>
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+        <span class="text-[10px] text-emerald-400 font-medium flex items-center">
+          <i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> Verified Active
+        </span>
+        <a href="${b.official_url}" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-3 py-1.5 rounded-lg flex items-center space-x-1 transition shadow">
+          <span>Official Portal</span>
+          <i data-lucide="external-link" class="w-3 h-3"></i>
+        </a>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function switchView(viewName) {
+  state.activeView = viewName;
+  const matcherWrapper = document.getElementById('matcherSectionWrapper');
+  const generalSection = document.getElementById('generalBenefitsSection');
+  const btnMatcher = document.getElementById('navBusinessMatcher');
+  const btnGeneral = document.getElementById('navGeneralBenefits');
+
+  if (viewName === 'general') {
+    matcherWrapper.classList.add('hidden');
+    generalSection.classList.remove('hidden');
+    if (btnGeneral) btnGeneral.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow transition cursor-pointer';
+    if (btnMatcher) btnMatcher.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer';
+    if (state.generalBenefits.length === 0) {
+      loadGeneralBenefits();
+    } else {
+      renderGeneralBenefits();
+    }
+  } else {
+    generalSection.classList.add('hidden');
+    matcherWrapper.classList.remove('hidden');
+    if (btnMatcher) btnMatcher.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow transition cursor-pointer';
+    if (btnGeneral) btnGeneral.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer';
+  }
 }

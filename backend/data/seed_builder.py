@@ -55,8 +55,8 @@ SCHEMES = [
       "NSFDC sanctions concessional loan share and disburses via the lending agency.",
       "Procure assets and submit utilization certificate."
     ],
-    "official_url": "https://nsfdc.nic.in/en/term-loan-scheme",
-    "last_verified": "2026-08-15",
+    "official_url": "https://nsfdc.nic.in/scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["sc", "scheduled caste", "term loan", "manufacturing", "transport", "workshop", "machinery", "nsfdc", "business", "suresh"]
   },
   # 2. NSFDC MSY
@@ -106,8 +106,8 @@ SCHEMES = [
       "Sanction of micro-credit without collateral requirement.",
       "Repayment in easy monthly instalments over 3 to 4 years."
     ],
-    "official_url": "https://nsfdc.nic.in/en/mahila-samriddhi-yojana",
-    "last_verified": "2026-08-20",
+    "official_url": "https://nsfdc.nic.in/scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["women", "mahila", "sc", "tailoring", "micro loan", "shg", "beauty parlour", "boutique", "stitching", "handicraft"]
   },
   # 3. NSFDC MCF
@@ -155,8 +155,8 @@ SCHEMES = [
       "Loan disbursal within 15 to 30 days directly to bank account.",
       "Repay via quarterly or monthly instalments."
     ],
-    "official_url": "https://nsfdc.nic.in/en/micro-credit-finance-mcf",
-    "last_verified": "2026-08-10",
+    "official_url": "https://nsfdc.nic.in/scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["micro credit", "sc", "hawker", "small shop", "artisan", "working capital", "tiny business"]
   },
   # 4. NSFDC Green Business
@@ -205,8 +205,8 @@ SCHEMES = [
       "Credit appraisal with focus on commercial viability of green unit.",
       "Disbursement of up to 90% project cost."
     ],
-    "official_url": "https://nsfdc.nic.in/en/green-business-scheme",
-    "last_verified": "2026-07-28",
+    "official_url": "https://nsfdc.nic.in/scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["green", "e-rickshaw", "solar", "ev", "recycling", "sc", "clean energy", "environment"]
   },
   # 5. NSFDC LVY
@@ -254,8 +254,8 @@ SCHEMES = [
       "Field officer verifies premise and eligibility.",
       "Sanction and disbursement of up to 90% project cost."
     ],
-    "official_url": "https://nsfdc.nic.in/en/laghu-vyavasay-yojana",
-    "last_verified": "2026-08-14",
+    "official_url": "https://nsfdc.nic.in/scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["sc", "lvy", "small business", "kirana", "retail", "nsfdc", "workshop", "suresh"]
   },
   # 6. NSFDC MAY
@@ -302,8 +302,8 @@ SCHEMES = [
       "Simple application and document vetting.",
       "Direct disbursement at concessional 4% interest rate."
     ],
-    "official_url": "https://nsfdc.nic.in/en/mahila-adhikarita-yojana",
-    "last_verified": "2026-08-16",
+    "official_url": "https://nsfdc.nic.in/scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["sc", "women", "mahila adhikarita", "tailoring", "dairy", "micro finance", "rekha"]
   },
   # 7. NBCFDC New Swarnima
@@ -353,8 +353,8 @@ SCHEMES = [
       "Sanction and disbursement of up to 95% project cost at 5% p.a.",
       "Quarterly or monthly repayment schedule with 6-month moratorium."
     ],
-    "official_url": "https://nbcfdc.gov.in/en/new-swarnima-for-women",
-    "last_verified": "2026-08-25",
+    "official_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["obc", "women", "new swarnima", "tailoring", "boutique", "beauty", "stitching", "nbcfdc", "garments", "food processing", "rekha"]
   },
   # 8. NBCFDC General Term Loan
@@ -403,8 +403,8 @@ SCHEMES = [
       "Technical and financial appraisal by SCA/Bank.",
       "Loan sanctioned with up to 85% project financing at 6% p.a."
     ],
-    "official_url": "https://nbcfdc.gov.in/en/term-loan-scheme",
-    "last_verified": "2026-08-14",
+    "official_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["obc", "term loan", "workshop", "nbcfdc", "services", "manufacturing", "trade", "machinery"]
   },
   # 9. NBCFDC Shilp Sampada
@@ -453,8 +453,8 @@ SCHEMES = [
       "Loan sanction with concessional interest of 5% p.a.",
       "Assistance provided for raw material procurement and equipment modernization."
     ],
-    "official_url": "https://nbcfdc.gov.in/en/shilp-sampada",
-    "last_verified": "2026-08-01",
+    "official_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["artisan", "craftsperson", "handicraft", "handloom", "weaver", "obc", "shilp sampada", "pottery", "woodwork"]
   },
   # 10. NBCFDC Saksham
@@ -501,8 +501,8 @@ SCHEMES = [
       "Submit technical credentials and DPR.",
       "Screening by committee and sanction of 90% project cost at 5.5% interest."
     ],
-    "official_url": "https://nbcfdc.gov.in/en/saksham-scheme",
-    "last_verified": "2026-08-11",
+    "official_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["obc", "saksham", "professionals", "diploma", "iti", "it", "clinic", "engineering"]
   },
   # 11. NBCFDC Krishi Sampada
@@ -549,8 +549,8 @@ SCHEMES = [
       "Field verification of agro activity.",
       "Sanction at 4% interest rate with flexible harvesting-linked repayments."
     ],
-    "official_url": "https://nbcfdc.gov.in/en/krishi-sampada",
-    "last_verified": "2026-08-05",
+    "official_url": "https://nbcfdc.gov.in/nbcfdc/web/en/individual-loan-scheme",
+    "last_verified": "2026-09-16",
     "keywords": ["obc", "krishi", "agriculture", "vegetable", "farming", "agro", "organic"]
   },
   # 12. NHFDC Divyangjan Swavalamban
@@ -602,8 +602,8 @@ SCHEMES = [
       "Sanction of loan up to 90% of project cost at 5% to 6% p.a. (1% rebate for women Divyangjan).",
       "Flexible repayment schedule up to 10 years."
     ],
-    "official_url": "https://nhfdc.nic.in/divyangjan-swavalamban-yojana",
-    "last_verified": "2026-08-18",
+    "official_url": "https://ndfdc.nic.in/schemes",
+    "last_verified": "2026-09-16",
     "keywords": ["pwd", "divyangjan", "disability", "udid", "handicapped", "swavalamban", "wheelchair", "special needs", "screen reader", "anita"]
   },
   # 13. NHFDC Micro Credit
@@ -651,8 +651,8 @@ SCHEMES = [
       "Fast-track sanction without collateral requirement.",
       "Monthly repayment of ₹1,500 - ₹2,500 over 3 years."
     ],
-    "official_url": "https://nhfdc.nic.in/micro-credit-scheme",
-    "last_verified": "2026-08-10",
+    "official_url": "https://ndfdc.nic.in/schemes",
+    "last_verified": "2026-09-16",
     "keywords": ["pwd", "disability", "micro finance", "udid", "home business", "kiosk", "handicrafts", "anita"]
   },
   # 14. NHFDC Young Professionals
@@ -700,8 +700,8 @@ SCHEMES = [
       "Verification of degree and business proposal.",
       "Sanction with 1% interest rebate for female professionals."
     ],
-    "official_url": "https://nhfdc.nic.in/young-professionals",
-    "last_verified": "2026-08-19",
+    "official_url": "https://ndfdc.nic.in/schemes",
+    "last_verified": "2026-09-16",
     "keywords": ["pwd", "divyangjan", "professionals", "graduate", "it", "consultancy", "anita"]
   },
   # 15. NHFDC Assistive Devices
@@ -749,8 +749,8 @@ SCHEMES = [
       "Apply through SCA or Nationalised Bank.",
       "Disbursement directly to authorized vehicle manufacturer or dealer."
     ],
-    "official_url": "https://nhfdc.nic.in/assistive-devices",
-    "last_verified": "2026-08-08",
+    "official_url": "https://ndfdc.nic.in/schemes",
+    "last_verified": "2026-09-16",
     "keywords": ["pwd", "retrofitted", "vehicle", "assistive device", "wheelchair", "transport", "anita"]
   },
   # 16. NMDFC Line 1
@@ -799,8 +799,8 @@ SCHEMES = [
       "Scrutiny by District Level Screening Committee.",
       "Sanction of loan with NMDFC providing 90% of funds at 6% interest."
     ],
-    "official_url": "https://nmdfc.org/term-loan-scheme",
-    "last_verified": "2026-08-16",
+    "official_url": "https://nmdfc.org/",
+    "last_verified": "2026-09-16",
     "keywords": ["minority", "muslim", "christian", "sikh", "jain", "buddhist", "nmdfc", "term loan", "trading", "workshop", "imran"]
   },
   # 17. NMDFC Line 2
@@ -847,8 +847,8 @@ SCHEMES = [
       "Submit income documents up to ₹8L ceiling.",
       "Appraisal and sanction at 8% p.a. (2% rebate for women)."
     ],
-    "official_url": "https://nmdfc.org/credit-line-2",
-    "last_verified": "2026-08-26",
+    "official_url": "https://nmdfc.org/",
+    "last_verified": "2026-09-16",
     "keywords": ["minority", "credit line 2", "8 lakh", "term loan", "workshop", "nmdfc", "imran"]
   },
   # 18. NMDFC Virasat
@@ -897,8 +897,8 @@ SCHEMES = [
       "Verification by local handicrafts officer.",
       "Sanction and disbursement of up to 90% project cost at 5% p.a."
     ],
-    "official_url": "https://nmdfc.org/virasat-scheme",
-    "last_verified": "2026-08-22",
+    "official_url": "https://nmdfc.org/",
+    "last_verified": "2026-09-16",
     "keywords": ["artisan", "craft", "minority", "virasat", "zari", "woodwork", "handicraft", "weaver", "imran"]
   },
   # 19. NMDFC Mahila Samridhi
@@ -946,8 +946,8 @@ SCHEMES = [
       "Fast group-based appraisal without collateral.",
       "Disbursement at 4% p.a. interest."
     ],
-    "official_url": "https://nmdfc.org/mahila-samridhi",
-    "last_verified": "2026-08-12",
+    "official_url": "https://nmdfc.org/",
+    "last_verified": "2026-09-16",
     "keywords": ["minority", "women", "mahila samridhi", "shg", "tailoring", "stitching", "micro loan"]
   },
   # 20. NMDFC Micro Finance
@@ -993,8 +993,8 @@ SCHEMES = [
       "Submit micro-loan requisition.",
       "Disbursal within 2-3 weeks at 5% interest rate."
     ],
-    "official_url": "https://nmdfc.org/micro-financing",
-    "last_verified": "2026-08-15",
+    "official_url": "https://nmdfc.org/",
+    "last_verified": "2026-09-16",
     "keywords": ["minority", "micro finance", "ngo", "shg", "petty shop", "imran"]
   },
   # 21. PMEGP
@@ -1049,7 +1049,7 @@ SCHEMES = [
       "Government subsidy (Margin Money) is kept in term deposit for 3 years and then adjusted against loan."
     ],
     "official_url": "https://www.kviconline.gov.in/pmegpeportal/pmegphome/index.jsp",
-    "last_verified": "2026-08-30",
+    "last_verified": "2026-09-16",
     "keywords": ["pmegp", "subsidy", "kvic", "manufacturing", "services", "sc", "st", "obc", "women", "dpr", "tailoring", "workshop", "rekha", "suresh"]
   },
   # 22. Stand-Up India
@@ -1100,8 +1100,8 @@ SCHEMES = [
       "Bank processes appraisal for Composite Loan (Term loan + Working capital).",
       "Sanction with maximum 18 months moratorium."
     ],
-    "official_url": "https://www.standupmitra.in",
-    "last_verified": "2026-08-28",
+    "official_url": "https://www.standupmitra.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["stand up india", "women", "sc", "st", "crore", "manufacturing", "greenfield", "suresh", "sidbi", "composite loan"]
   },
   # 23. MUDRA Shishu
@@ -1150,8 +1150,8 @@ SCHEMES = [
       "Sanctioned loan credited to MUDRA Card / savings account.",
       "Use MUDRA RuPay Debit Card to draw working capital as needed."
     ],
-    "official_url": "https://www.mudra.org.in",
-    "last_verified": "2026-08-15",
+    "official_url": "https://www.mudra.org.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["mudra", "shishu", "50000", "micro loan", "collateral free", "vendor", "small shop", "tailoring", "rekha"]
   },
   # 24. MUDRA Kishore
@@ -1199,8 +1199,8 @@ SCHEMES = [
       "Credit assessment without collateral under CGTMSE/CGFMU guarantee.",
       "Loan disbursed in term loan and overdraft components."
     ],
-    "official_url": "https://www.mudra.org.in",
-    "last_verified": "2026-08-20",
+    "official_url": "https://www.mudra.org.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["mudra", "kishore", "5 lakh", "machinery", "tailoring", "workshop", "working capital", "rekha", "suresh"]
   },
   # 25. MUDRA Tarun
@@ -1249,8 +1249,8 @@ SCHEMES = [
       "Loan appraisal under MUDRA credit guarantee scheme.",
       "Disbursement with flexible repayment options."
     ],
-    "official_url": "https://www.mudra.org.in",
-    "last_verified": "2026-08-15",
+    "official_url": "https://www.mudra.org.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["mudra", "tarun", "10 lakh", "expansion", "manufacturing", "suresh", "workshop"]
   },
   # 26. PM Vishwakarma
@@ -1302,8 +1302,8 @@ SCHEMES = [
       "Receive ₹15,000 digital voucher to purchase modern toolkit.",
       "Access Tranche-1 collateral-free enterprise loan up to ₹1,00,000 at 5% interest."
     ],
-    "official_url": "https://pmvishwakarma.gov.in",
-    "last_verified": "2026-09-01",
+    "official_url": "https://pmvishwakarma.gov.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["vishwakarma", "artisan", "carpenter", "blacksmith", "tailor", "darzi", "potter", "cobbler", "traditional craft", "toolkit", "15000", "imran", "rekha"]
   },
   # 27. PM SVANidhi
@@ -1352,8 +1352,8 @@ SCHEMES = [
       "Loan disbursed directly to bank account.",
       "Repay in monthly instalments over 12 months (Tranche 1: ₹10k) to unlock higher tranches (₹20k & ₹50k)."
     ],
-    "official_url": "https://pmsvanidhi.mohua.gov.in",
-    "last_verified": "2026-08-20",
+    "official_url": "https://pmsvanidhi.mohua.gov.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["svanidhi", "vendor", "street vendor", "hawker", "rehari", "thela", "working capital", "10000"]
   },
   # 28. VCF-SC
@@ -1402,8 +1402,8 @@ SCHEMES = [
       "Detailed financial and legal due diligence.",
       "Sanction of venture capital investment with up to 8 years investment horizon."
     ],
-    "official_url": "https://www.vcfsc.in",
-    "last_verified": "2026-08-10",
+    "official_url": "https://www.vcfsc.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["venture capital", "vcf-sc", "sc", "equity", "tech", "startup", "ifci", "mosje"]
   },
   # 29. Mahila Coir Yojana
@@ -1450,7 +1450,7 @@ SCHEMES = [
       "Start domestic production with buyback linkages through Coir Board showrooms."
     ],
     "official_url": "https://coirboard.gov.in/?page_id=275",
-    "last_verified": "2026-07-20",
+    "last_verified": "2026-09-16",
     "keywords": ["coir", "women", "mahila coir", "subsidy", "handicraft", "rural", "coconut", "spinning"]
   },
   # 30. CGTMSE
@@ -1500,8 +1500,8 @@ SCHEMES = [
       "Lending institution directly secures guarantee coverage from CGTMSE portal.",
       "Loan disbursed without any real estate mortgage requirement."
     ],
-    "official_url": "https://www.cgtmse.in",
-    "last_verified": "2026-08-22",
+    "official_url": "https://www.cgtmse.in/",
+    "last_verified": "2026-09-16",
     "keywords": ["cgtmse", "collateral free", "guarantee", "msme", "workshop", "manufacturing", "suresh"]
   },
   # 31. Dr. Ambedkar Special Assistance
@@ -1548,13 +1548,14 @@ SCHEMES = [
       "Joint physical inspection by District Industries Centre (DIC).",
       "Capital subsidy credited to loan account as back-ended subsidy."
     ],
-    "official_url": "https://socialjustice.gov.in",
-    "last_verified": "2026-08-20",
+    "official_url": "https://www.scsthub.in",
+    "last_verified": "2026-09-16",
     "keywords": ["dr ambedkar", "sc", "st", "subsidy", "manufacturing", "dalit", "suresh", "workshop"]
   },
   # 32. SIDBI Mahila Udyam Nidhi
   {
     "id": "sidbi-mahila-udyam-nidhi",
+    "is_active": False,
     "name": "SIDBI Mahila Udyam Nidhi (MUN) Scheme",
     "issuing_body": "Small Industries Development Bank of India (SIDBI)",
     "category_targets": ["Women"],
@@ -1597,9 +1598,59 @@ SCHEMES = [
       "Sanction of soft loan for equity gap along with primary term loan.",
       "Enjoy 5-year moratorium on soft loan repayment."
     ],
-    "official_url": "https://www.sidbi.in",
-    "last_verified": "2026-08-25",
+    "official_url": "https://www.sidbi.in/en/",
+    "last_verified": "2026-09-16",
     "keywords": ["sidbi", "women", "mahila udyam nidhi", "soft loan", "equity", "tailoring", "rekha"]
+  },
+  # 33. Telangana Dalit Bandhu Scheme
+  {
+    "id": "ts-dalit-bandhu",
+    "name": "Telangana Dalit Bandhu Scheme",
+    "issuing_body": "Scheduled Castes Development Department, Government of Telangana",
+    "category_targets": ["SC"],
+    "gender_targets": ["Any", "Male", "Female", "Transgender"],
+    "summary": "Direct capital grant of ₹10 Lakhs (100% financial assistance) for Scheduled Caste beneficiaries to establish viable self-employment or micro-enterprises without bank loans or collateral.",
+    "purpose": "Promote economic empowerment and entrepreneurship among Scheduled Caste households by providing one-time 100% capital grant for asset creation across manufacturing, services, transport, and trading sectors.",
+    "rules": {
+      "categories": ["SC"],
+      "gender": ["Any", "Male", "Female", "Transgender"],
+      "min_age": 18,
+      "max_age": 60,
+      "income_ceiling": 1000000,
+      "disability_required": False,
+      "min_project_cost": 50000,
+      "max_project_cost": 1000000,
+      "eligible_sectors": ["Manufacturing", "Services", "Trading", "Transport", "Agriculture/Allied", "Artisans/Handicrafts"],
+      "eligible_states": ["Telangana", "All"],
+      "min_education": "None",
+      "business_stage": ["New", "Existing", "Expansion"]
+    },
+    "financials": {
+      "max_loan_amount": 0,
+      "subsidy_percent": 100.0,
+      "max_subsidy_amount": 1000000,
+      "margin_money_percent": 0.0,
+      "interest_rate_percent": 0.0,
+      "max_tenure_years": 0,
+      "moratorium_months": 0,
+      "notes": "100% non-repayable grant up to ₹10 Lakhs deposited directly into beneficiary account for enterprise asset creation."
+    },
+    "documents": [
+      {"name": "Caste Certificate (SC)", "mandatory": True, "notes": "Issued by Telangana Revenue Department (MeeSeva)"},
+      {"name": "Aadhaar Card", "mandatory": True, "notes": "Proof of identity and resident linkage"},
+      {"name": "Food Security / Ration Card", "mandatory": True, "notes": "Household validation"},
+      {"name": "Bank Account Details (Dalit Bandhu Account)", "mandatory": True, "notes": "Designated bank account"},
+      {"name": "Detailed Project Proposal / Asset Quotation", "mandatory": True, "notes": "Quotations for vehicle, machinery, or business setup"}
+    ],
+    "application_process": [
+      "Identification and selection by District Collector and Mandal-level scrutiny committees.",
+      "Submit enterprise proposal for selected business sector (transport, machinery, services, retail).",
+      "Sanction of 100% capital grant directly to special Dalit Bandhu account.",
+      "Asset procurement through empaneled vendors and physical verification by authorities."
+    ],
+    "official_url": "https://dalitbandhu.telangana.gov.in/",
+    "last_verified": "2026-09-16",
+    "keywords": ["dalit bandhu", "sc", "scheduled caste", "telangana", "grant", "subsidy", "capital grant", "transport", "suresh"]
   }
 ]
 

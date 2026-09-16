@@ -58,6 +58,20 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(res_detail.status_code, 200)
         self.assertEqual(res_detail.json()["id"], first_id)
 
+    def test_general_benefits_endpoint(self):
+        """Test general benefits tier 2 discovery catalogue."""
+        res = self.client.get("/api/general-benefits")
+        self.assertEqual(res.status_code, 200)
+        benefits = res.json()
+        self.assertEqual(len(benefits), 41)
+        
+        # Test category filter
+        res_agri = self.client.get("/api/general-benefits?category=Agriculture")
+        self.assertEqual(res_agri.status_code, 200)
+        agri_list = res_agri.json()
+        self.assertTrue(len(agri_list) > 0)
+
+
     def test_calculate_endpoint(self):
         """Test live financial calculation endpoint."""
         payload = {
